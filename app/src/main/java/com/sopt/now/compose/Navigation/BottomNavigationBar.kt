@@ -8,21 +8,25 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
+import com.sopt.now.compose.R
 import com.sopt.now.compose.data.BottomNavigationItem
 
 @Composable
-fun BottomNavigationBar(navController: NavHostController) {
+fun BottomNavigationBar(
+    navController: NavHostController,
+    ) {
     val items = listOf(
         BottomNavigationItem(
             icon = Icons.Filled.Home,
             route = "home",
-            label = "Home"
+            label = stringResource(id = R.string.Home)
         ),
         BottomNavigationItem(
             icon = Icons.Filled.Person,
             route = "mypage",
-            label = "Mypage"
+            label = stringResource(id = R.string.Mypage)
         )
     )
     NavigationBar {

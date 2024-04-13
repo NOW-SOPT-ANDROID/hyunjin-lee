@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -37,7 +38,7 @@ fun MypageScreen(
     ) {
         // title
         Text(
-            text = "마이페이지",
+            text = stringResource(id = R.string.MYPAGE),
             fontWeight = FontWeight.Bold,
             fontSize = 30.sp,
             modifier = modifier.fillMaxWidth(),
@@ -59,7 +60,7 @@ fun MypageScreen(
 
         // id
         Text(
-            text = "ID",
+            text = stringResource(id = R.string.ID),
             fontSize = 20.sp,
             modifier = modifier.fillMaxWidth(),
             textAlign = TextAlign.Left
@@ -77,7 +78,7 @@ fun MypageScreen(
 
         // pw
         Text(
-            text = "비밀번호",
+            text = stringResource(id = R.string.PW),
             fontSize = 20.sp,
             modifier = modifier.fillMaxWidth(),
             textAlign = TextAlign.Left
@@ -95,7 +96,7 @@ fun MypageScreen(
 
         // nickname
         Text(
-            text = "닉네임",
+            text = stringResource(id = R.string.NICKNAME),
             fontSize = 20.sp,
             modifier = modifier.fillMaxWidth(),
             textAlign = TextAlign.Left
@@ -113,7 +114,7 @@ fun MypageScreen(
 
         // mbti
         Text(
-            text = "MBTI",
+            text = stringResource(id = R.string.MBTI),
             fontSize = 20.sp,
             modifier = modifier.fillMaxWidth(),
             textAlign = TextAlign.Left
