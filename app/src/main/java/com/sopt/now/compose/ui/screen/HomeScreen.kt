@@ -11,11 +11,12 @@ import com.sopt.now.compose.ui.Item.myprofileList
 @Composable
 fun HomeScreen() {
     LazyColumn {
+        // 내 프로필 아이템 리스트
         items(myprofileList) {
             MyProfileItem(it)
         }
-    }
-    LazyColumn {
+
+        // 친구 목록 아이템 리스트
         items(friendList) {
             FriendProfileItem(it)
         }
