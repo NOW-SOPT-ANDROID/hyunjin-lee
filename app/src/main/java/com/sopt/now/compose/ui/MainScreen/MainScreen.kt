@@ -1,4 +1,4 @@
-package com.sopt.now.compose.ui.screen
+package com.sopt.now.compose.ui.MainScreen
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.rememberNavController

@@ -1,4 +1,4 @@
-package com.sopt.now.compose.ui.screen
+package com.sopt.now.compose.ui.LoginScreen
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.sopt.now.compose.R
-import com.sopt.now.compose.viewmodel.UserViewModel
+import com.sopt.now.compose.ui.SignupScreen.UserViewModel
 
 @Composable
 fun LoginScreen(
@@ -113,13 +113,14 @@ fun LoginScreen(
             onClick = {
                 /* 클릭 시 수행될 동작 */
                 if (isValidLogin(userViewModel.userId.value.toString(), userViewModel.userPw.value.toString(),
-                        userViewModel.userId.value.toString(), userViewModel.userPw.value.toString())) {
+                        userViewModel.userId.value.toString(), userViewModel.userPw.value.toString())
+                ) {
                     // 로그인 성공 시
-                    Toast.makeText(context, R.string.SUCCESS_LOGIN.toString(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "로그인 성공", Toast.LENGTH_SHORT).show()
                     navController.navigate("mypage")
                 } else {
                     // 로그인 실패 시
-                    Toast.makeText(context, R.string.FAIL_LOGIN.toString(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "로그인 실패", Toast.LENGTH_SHORT).show()
                 }
             },
             modifier = Modifier

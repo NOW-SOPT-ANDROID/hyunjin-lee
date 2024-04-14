@@ -1,4 +1,4 @@
-package com.sopt.now.compose.ui.screen
+package com.sopt.now.compose.ui.HomeScreen
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items

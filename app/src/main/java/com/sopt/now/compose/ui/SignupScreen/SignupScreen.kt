@@ -1,4 +1,4 @@
-package com.sopt.now.compose.ui.screen
+package com.sopt.now.compose.ui.SignupScreen
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
@@ -27,7 +27,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.sopt.now.compose.R
-import com.sopt.now.compose.viewmodel.UserViewModel
 
 
 @Composable
@@ -125,10 +124,9 @@ fun SignupScreen(
         // 높이 30dp인 공간 추가
         Spacer(modifier = modifier.height(30.dp))
 
-        // nickname
+        // mbti
         Text(
             text = stringResource(id = R.string.MBTI),
-
             fontSize = 20.sp,
             modifier = modifier.fillMaxWidth(),
             textAlign = TextAlign.Left
@@ -140,7 +138,7 @@ fun SignupScreen(
                 userMbti = newValue }, // 이 부분 안쓰면 입력안됨
             modifier = modifier
                 .fillMaxWidth(),
-            label = { Text(stringResource(id = R.string.input_NICKNAME)) },
+            label = { Text(stringResource(id = R.string.input_MBTI)) },
             placeholder = { Text(stringResource(id = R.string.MBTI_TEXT)) },
             singleLine = true,
         )
@@ -159,7 +157,7 @@ fun SignupScreen(
                     userViewModel.userName.value = userName
                     userViewModel.userMbti.value = userMbti
 
-                    Toast.makeText(context, R.string.SUCCESS_SIGNUP.toString(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "회원가입성공", Toast.LENGTH_SHORT).show()
                     navController.navigate("login")
                 }
             },
@@ -180,19 +178,11 @@ fun CheckId(id: String): Boolean {
     else return false
 }
 
-fun CheckPw(pw: String): Boolean {
-    if(pw.length >= 8 && pw.length <= 12){
-        return true
-    }
-    else return false
-}
+fun CheckPw(pw: String): Boolean = pw.length in 8..12
 
-fun CheckName(name: String): Boolean {
-    if(name.length == 1 && name == " "){
-        return false
-    }
-    else if(name.length >= 1) return true
-    else return false
+fun CheckName(name: String): Boolean  = when {
+    name.length == 1 && name == " " -> false
+    else -> name.isNotEmpty()
 }
 
 fun CheckMbti(mbti: String): Boolean {

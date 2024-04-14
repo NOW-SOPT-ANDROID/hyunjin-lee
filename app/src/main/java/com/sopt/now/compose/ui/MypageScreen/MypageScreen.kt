@@ -1,4 +1,4 @@
-package com.sopt.now.compose.ui.screen
+package com.sopt.now.compose.ui.MypageScreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.sopt.now.compose.R
-import com.sopt.now.compose.viewmodel.UserViewModel
+import com.sopt.now.compose.ui.SignupScreen.UserViewModel
 
 
 @Composable

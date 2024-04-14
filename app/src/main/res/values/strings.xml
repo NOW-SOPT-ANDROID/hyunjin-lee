@@ -27,6 +27,7 @@
 
     <string name="MBTI">MBTI</string>
     <string name="MBTI_TEXT">entj</string>
+    <string name="input_MBTI">MBTI를 입력해주세요</string>
 
 
 </resources>

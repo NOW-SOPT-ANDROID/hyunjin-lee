@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.sopt.now.compose.Navigation.BottomNavigationBar
-import com.sopt.now.compose.ui.screen.MainScreen
+import com.sopt.now.compose.ui.MainScreen.MainScreen
 import com.sopt.now.compose.ui.theme.NOWSOPTAndroidTheme
 
 class MainActivity : ComponentActivity() {

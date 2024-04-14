@@ -1,4 +1,4 @@
-package com.sopt.now.compose.viewmodel
+package com.sopt.now.compose.ui.SignupScreen
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
