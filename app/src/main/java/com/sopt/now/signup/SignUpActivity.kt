@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
+import com.sopt.now.R
 import com.sopt.now.data.UserData
 import com.sopt.now.databinding.ActivitySignupBinding
 import com.sopt.now.login.LoginActivity
@@ -47,9 +48,10 @@ class SignUpActivity : AppCompatActivity()  {
 
     // userinfo 입력
     private fun getUserInfo(): UserData = UserData(
+        profileImage = R.drawable.ic_profile_img,
         id = binding.etSignupId.text.toString(),
         pw = binding.etSignupPw.text.toString(),
         name = binding.etSignupNickname.text.toString(),
-        mbti = binding.etSignupMbti.text.toString()
+        mbti = binding.etSignupMbti.text.toString(),
     )
 }

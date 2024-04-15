@@ -10,5 +10,5 @@ data class UserData(
     val id: String,
     val pw: String,
     val name: String,
-    val mbti: String
+    val mbti: String,
 ): Parcelable
