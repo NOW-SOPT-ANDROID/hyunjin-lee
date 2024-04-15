@@ -1,11 +1,15 @@
 package com.sopt.now.main
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import com.sopt.now.R
 import com.sopt.now.data.UserData
 import com.sopt.now.databinding.ActivityMainBinding
+import com.sopt.now.home.HomeFragment
+import com.sopt.now.login.LoginActivity
+import com.sopt.now.mypage.MyPageFragment
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
@@ -13,33 +17,48 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        getUserData()
-        setUserData()
-
         setContentView(binding.root)
-    }
 
-    private fun getUserData() {
-        val user: UserData? = intent.getParcelableExtra(USER_DATA) // User 객체 받기
-        if (user != null) {
-            viewModel.setUserInfo(user) // ViewModel에 User 객체 적용
+        // 액티비티가 처음 생성될 때, HomeFragment를 화면에 표시
+        val currentFragment = supportFragmentManager.findFragmentById(binding.fcvHome.id)
+        if (currentFragment == null) {
+            supportFragmentManager.beginTransaction()
+                .add(binding.fcvHome.id, HomeFragment())
+                .commit()
+        }
+
+        // 바텀 네비게이션 클릭 이벤트 처리 함수 호출
+        setBottomNavigation()
+
+        // LoginActivity에서 전달한 데이터 viewmodel에 저장
+        intent.getParcelableExtra<UserData>(LoginActivity.USER_DATA)?.let{
+            viewModel.setUserInfo(it)
         }
     }
 
-    private fun setUserData() {
-        val user = viewModel.userInfo.value ?: return
-        with(binding) {
-            tvMainIdContent.text = user.id
-            tvMainPwContent.text = user.pw
-            tvMainMbtiContent.text = user.mbti
-            tvMainName.text = user.name
+    private fun setBottomNavigation() {
+        // 바텀 네비게이션 아이템 선택 리스너 설정
+        binding.bnvHome.setOnItemSelectedListener{
+            when (it.itemId) {
+                R.id.menu_home-> { // home 선택
+                    replaceFragment(HomeFragment())
+                    true
+                }
+
+                R.id.menu_mypage-> { // my page 선택
+                    replaceFragment(MyPageFragment())
+                    true
+                }
+
+                else -> false
+            }
         }
     }
 
-    // 상수화
-    companion object {
-        const val USER_DATA = "user_data"
+    private fun replaceFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(binding.fcvHome.id, fragment)
+            .commit()
     }
 }
 

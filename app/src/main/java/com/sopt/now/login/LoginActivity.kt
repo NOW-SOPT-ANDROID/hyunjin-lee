@@ -15,9 +15,15 @@ class LoginActivity : AppCompatActivity() {
     private val binding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
     private val viewModel: LoginViewModel by viewModels()
 
-    // 회원가입 정보
+    // 상수화
+    companion object {
+        const val USER_DATA = "user_data"
+    }
+
+    // 회원가입 정보 받는 콜백
     private val getSignupResult =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            result ->
             if (result.resultCode == RESULT_OK) {
                 val user: UserData? = result.data?.getParcelableExtra(USER_DATA)
                 user?.let { viewModel.setUserInfo(it) }
@@ -44,11 +50,6 @@ class LoginActivity : AppCompatActivity() {
             binding.etLoginId.setText(user.id) // 로그인 화면에 사용자 ID를 자동으로 작성
             binding.etLoginPw.setText(user.pw) // 로그인 화면에 사용자 PW를 자동으로 작성
         }
-    }
-
-    // 상수화
-    companion object {
-        const val USER_DATA = "user_data"
     }
 
     private fun handleLoginClick() {
