@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.sopt.now.R
 import com.sopt.now.databinding.ActivityHomeBinding
+import com.sopt.now.mypage.MyPageFragment
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
@@ -35,7 +36,7 @@ class HomeActivity : AppCompatActivity() {
                 }
 
                 R.id.menu_mypage-> { // my page 선택
-                    replaceFragment(HomeFragment())
+                    replaceFragment(MyPageFragment())
                     true
                 }
 
