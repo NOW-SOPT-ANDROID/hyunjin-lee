@@ -112,7 +112,8 @@
         android:text="회원가입 하기"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_signup_mbti"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
