@@ -36,6 +36,7 @@
         android:layout_height="wrap_content"
         android:hint="아이디를 입력해주세요"
         android:layout_marginTop="10dp"
+        android:singleLine="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_signup_id" />/>
@@ -56,6 +57,7 @@
         android:layout_height="wrap_content"
         android:hint="비밀번호를 입력해주세요"
         android:layout_marginTop="10dp"
+        android:singleLine="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_signup_pw" />
@@ -76,6 +78,7 @@
         android:layout_height="wrap_content"
         android:hint="닉네임을 입력해주세요"
         android:layout_marginTop="10dp"
+        android:singleLine="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_signup_nickname" />
@@ -96,6 +99,7 @@
         android:layout_height="wrap_content"
         android:hint="MBTI를 입력해주세요"
         android:layout_marginTop="10dp"
+        android:singleLine="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_signup_mbti" />
