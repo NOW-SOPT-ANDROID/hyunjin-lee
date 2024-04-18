@@ -19,14 +19,14 @@ class SignUpActivity : AppCompatActivity()  {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+
         setSignupResult()
         // 클릭리스너 설정
         binding.btSignupButton.setOnClickListener {
             val user = getUserInfo()
             viewModel.signUp(user)
         }
-
-        setContentView(binding.root)
     }
 
     private fun setSignupResult() {
