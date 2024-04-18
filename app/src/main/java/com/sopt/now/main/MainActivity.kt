@@ -28,26 +28,14 @@ class MainActivity : AppCompatActivity() {
         const val BACK_PRESSED_DURATION = 2000L
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        // 액티비티가 처음 생성될 때, HomeFragment를 화면에 표시
-        val currentFragment = supportFragmentManager.findFragmentById(binding.fcvHome.id)
-        if (currentFragment == null) {
-            supportFragmentManager.beginTransaction()
-                .add(binding.fcvHome.id, HomeFragment())
-                .commit()
-        }
-
         // 바텀 네비게이션 클릭 이벤트 처리 함수 호출
         setBottomNavigation()
 
-        // LoginActivity에서 전달한 데이터 viewmodel에 저장
-        intent.getParcelableExtra<UserData>(LoginActivity.USER_DATA)?.let{
-            viewModel.setUserInfo(it)
-        }
+
     }
 
     // 뒤로가기 두 번 누르면 종료
@@ -70,12 +58,10 @@ class MainActivity : AppCompatActivity() {
                     replaceFragment(HomeFragment())
                     true
                 }
-
                 R.id.menu_mypage-> { // my page 선택
                     replaceFragment(MyPageFragment())
                     true
                 }
-
                 else -> false
             }
         }
