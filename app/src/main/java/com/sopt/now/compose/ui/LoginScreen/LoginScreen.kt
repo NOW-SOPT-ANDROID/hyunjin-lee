@@ -1,4 +1,4 @@
-package com.sopt.now.compose.ui.screen
+package com.sopt.now.compose.ui.LoginScreen
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
@@ -17,13 +17,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.sopt.now.compose.viewmodel.UserViewModel
+import com.sopt.now.compose.R
+import com.sopt.now.compose.ui.SignupScreen.UserViewModel
 
 @Composable
 fun LoginScreen(
@@ -43,7 +45,7 @@ fun LoginScreen(
 
         // title
         Text(
-            text = "Welcome To SOPT",
+            text = stringResource(id = R.string.app_name),
             modifier = Modifier.align(Alignment.CenterHorizontally),
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp
@@ -54,7 +56,7 @@ fun LoginScreen(
 
         // id
         Text(
-            text = "ID",
+            text = stringResource(id = R.string.ID)
         )
 
         TextField(
@@ -62,8 +64,8 @@ fun LoginScreen(
             onValueChange = { userViewModel.userId.value = it },
             modifier = Modifier
                 .fillMaxWidth(),
-            label = { Text("아이디를 입력해주세요") },
-            placeholder = { Text("daisyy") },
+            label = { Text(stringResource(id = R.string.input_ID)) },
+            placeholder = { Text(stringResource(id = R.string.ID_daisy)) },
             singleLine = true,
         )
 
@@ -72,7 +74,7 @@ fun LoginScreen(
 
         // pw
         Text(
-            text = "비밀번호",
+            text = stringResource(id = R.string.PW)
         )
 
         TextField(
@@ -80,8 +82,8 @@ fun LoginScreen(
             onValueChange = { userViewModel.userPw.value = it },
             modifier = Modifier
                 .fillMaxWidth(),
-            label = { Text("비밀번호를 입력해주세요") },
-            placeholder = { Text("**********") },
+            label = { Text(stringResource(id = R.string.input_PW)) },
+            placeholder = { Text(stringResource(id = R.string.PW_TEXT)) },
             singleLine = true,
             visualTransformation = PasswordVisualTransformation(), // 비밀번호 마스킹
         )
@@ -92,14 +94,14 @@ fun LoginScreen(
         // signup button
         TextButton(
             onClick = { /* 클릭 시 수행될 동작 */
-                Toast.makeText(context, "회원가입하기", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, R.string.SIGNUP.toString(), Toast.LENGTH_SHORT).show()
                 navController.navigate("signup")
             },
             modifier = Modifier
                 .fillMaxWidth(),
         ) {
             Text(
-                text = "회원가입",
+                text = stringResource(id = R.string.SIGNUP),
                 fontWeight = FontWeight.Bold,
                 fontSize = 13.sp,
                 textDecoration = TextDecoration.Underline,
@@ -111,7 +113,8 @@ fun LoginScreen(
             onClick = {
                 /* 클릭 시 수행될 동작 */
                 if (isValidLogin(userViewModel.userId.value.toString(), userViewModel.userPw.value.toString(),
-                        userViewModel.userId.value.toString(), userViewModel.userPw.value.toString())) {
+                        userViewModel.userId.value.toString(), userViewModel.userPw.value.toString())
+                ) {
                     // 로그인 성공 시
                     Toast.makeText(context, "로그인 성공", Toast.LENGTH_SHORT).show()
                     navController.navigate("mypage")
@@ -125,7 +128,7 @@ fun LoginScreen(
                 .fillMaxWidth(),
             shape = RoundedCornerShape(30.dp)
         ) {
-            Text("로그인하기", color = Color.White)
+            Text(stringResource(id = R.string.LOGIN), color = Color.White)
         }
     }
 }

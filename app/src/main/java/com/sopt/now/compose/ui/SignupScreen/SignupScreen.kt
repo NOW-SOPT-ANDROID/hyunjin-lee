@@ -1,4 +1,4 @@
-package com.sopt.now.compose.ui.screen
+package com.sopt.now.compose.ui.SignupScreen
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
@@ -20,12 +20,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.sopt.now.compose.viewmodel.UserViewModel
+import com.sopt.now.compose.R
 
 
 @Composable
@@ -47,7 +48,7 @@ fun SignupScreen(
     ) {
         // title
         Text(
-            text = "SIGN UP",
+            text = stringResource(id = R.string.SIGNUP),
             fontWeight = FontWeight.Bold,
             fontSize = 30.sp,
             modifier = modifier.fillMaxWidth(),
@@ -59,7 +60,7 @@ fun SignupScreen(
 
         // id
         Text(
-            text = "ID",
+            text =  stringResource(id = R.string.ID),
             fontSize = 20.sp,
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Left
@@ -71,8 +72,8 @@ fun SignupScreen(
                 userId = newValue }, // 이 부분 안쓰면 입력안됨
             modifier = Modifier
                 .fillMaxWidth(),
-            label = { Text("아이디를 입력해주세요") },
-            placeholder = { Text("daisyy") },
+            label = { Text(stringResource(id = R.string.input_ID)) },
+            placeholder = { Text(stringResource(id = R.string.ID_daisy)) },
             singleLine = true,
         )
 
@@ -81,8 +82,7 @@ fun SignupScreen(
 
         // pw
         Text(
-            text = "비밀번호",
-
+            text = stringResource(id = R.string.PW),
             fontSize = 20.sp,
             modifier = modifier.fillMaxWidth(),
             textAlign = TextAlign.Left
@@ -94,8 +94,8 @@ fun SignupScreen(
                 userPw = newValue }, // 이 부분 안쓰면 입력안됨
             modifier = modifier
                 .fillMaxWidth(),
-            label = { Text("비밀번호를 입력해주세요") },
-            placeholder = { Text("123456") },
+            label = { Text(stringResource(id = R.string.input_PW)) },
+            placeholder = { Text(stringResource(id = R.string.PW_TEXT)) },
             singleLine = true,
         )
 
@@ -104,8 +104,7 @@ fun SignupScreen(
 
         // nickname
         Text(
-            text = "닉네임",
-
+            text = stringResource(id = R.string.NICKNAME),
             fontSize = 20.sp,
             modifier = modifier.fillMaxWidth(),
             textAlign = TextAlign.Left
@@ -117,18 +116,17 @@ fun SignupScreen(
                 userName = newValue }, // 이 부분 안쓰면 입력안됨
             modifier = modifier
                 .fillMaxWidth(),
-            label = { Text("닉네임 입력해주세요") },
-            placeholder = { Text("Hyunjin Lee") },
+            label = { Text(stringResource(id = R.string.input_NICKNAME)) },
+            placeholder = { Text(stringResource(id = R.string.NICKNAME_TEXT)) },
             singleLine = true,
         )
 
         // 높이 30dp인 공간 추가
         Spacer(modifier = modifier.height(30.dp))
 
-        // nickname
+        // mbti
         Text(
-            text = "MBTI",
-
+            text = stringResource(id = R.string.MBTI),
             fontSize = 20.sp,
             modifier = modifier.fillMaxWidth(),
             textAlign = TextAlign.Left
@@ -140,8 +138,8 @@ fun SignupScreen(
                 userMbti = newValue }, // 이 부분 안쓰면 입력안됨
             modifier = modifier
                 .fillMaxWidth(),
-            label = { Text("닉네임 입력해주세요") },
-            placeholder = { Text("entj") },
+            label = { Text(stringResource(id = R.string.input_MBTI)) },
+            placeholder = { Text(stringResource(id = R.string.MBTI_TEXT)) },
             singleLine = true,
         )
 
@@ -159,7 +157,7 @@ fun SignupScreen(
                     userViewModel.userName.value = userName
                     userViewModel.userMbti.value = userMbti
 
-                    Toast.makeText(context, "회원가입 성공", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "회원가입성공", Toast.LENGTH_SHORT).show()
                     navController.navigate("login")
                 }
             },
@@ -168,7 +166,7 @@ fun SignupScreen(
                 .fillMaxWidth(),
             shape = RoundedCornerShape(30.dp)
         ) {
-            Text("회원가입하기", color = Color.White)
+            Text(stringResource(id = R.string.SIGNUP), color = Color.White)
         }
     }
 }
@@ -180,19 +178,11 @@ fun CheckId(id: String): Boolean {
     else return false
 }
 
-fun CheckPw(pw: String): Boolean {
-    if(pw.length >= 8 && pw.length <= 12){
-        return true
-    }
-    else return false
-}
+fun CheckPw(pw: String): Boolean = pw.length in 8..12
 
-fun CheckName(name: String): Boolean {
-    if(name.length == 1 && name == " "){
-        return false
-    }
-    else if(name.length >= 1) return true
-    else return false
+fun CheckName(name: String): Boolean  = when {
+    name.length == 1 && name == " " -> false
+    else -> name.isNotEmpty()
 }
 
 fun CheckMbti(mbti: String): Boolean {

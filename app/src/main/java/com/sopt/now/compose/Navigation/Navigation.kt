@@ -8,11 +8,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.sopt.now.compose.MainScaffold
-import com.sopt.now.compose.ui.screen.HomeScreen
-import com.sopt.now.compose.ui.screen.LoginScreen
-import com.sopt.now.compose.ui.screen.MypageScreen
-import com.sopt.now.compose.ui.screen.SignupScreen
-import com.sopt.now.compose.viewmodel.UserViewModel
+import com.sopt.now.compose.ui.HomeScreen.HomeScreen
+import com.sopt.now.compose.ui.LoginScreen.LoginScreen
+import com.sopt.now.compose.ui.MypageScreen.MypageScreen
+import com.sopt.now.compose.ui.SignupScreen.SignupScreen
+import com.sopt.now.compose.ui.SignupScreen.UserViewModel
 
 @Composable
 fun Navigation(navController: NavHostController) {

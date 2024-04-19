@@ -1,3 +1,33 @@
 <resources>
     <string name="app_name">NOW SOPT Android</string>
+    <string name="top_bar">♡ SOPT ♡</string>
+    <string name="Home">HOME</string>
+    <string name="Mypage">PROFILE</string>
+
+    <string name="ID">ID</string>
+    <string name="input_ID">아이디를 입력해주세요</string>
+    <string name="ID_daisy">daisyy</string>
+
+    <string name="PW">비밀번호</string>
+    <string name="input_PW">비밀번호를 입력해주세요</string>
+    <string name="PW_TEXT">**********</string>
+
+    <string name="SIGNUP">회원가입</string>
+    <string name="SUCCESS_SIGNUP">회원가입 성공</string>
+
+    <string name="LOGIN">로그인</string>
+    <string name="SUCCESS_LOGIN">로그인 성공</string>
+    <string name="FAIL_LOGIN">로그인 실패</string>
+
+    <string name="MYPAGE">마이페이지</string>
+    <string name="NICKNAME">닉네임</string>
+    <string name="input_NICKNAME">닉네임을 입력해주세요</string>
+    <string name="NICKNAME_TEXT">Hyunjin Lee</string>
+
+
+    <string name="MBTI">MBTI</string>
+    <string name="MBTI_TEXT">entj</string>
+    <string name="input_MBTI">MBTI를 입력해주세요</string>
+
+
 </resources>

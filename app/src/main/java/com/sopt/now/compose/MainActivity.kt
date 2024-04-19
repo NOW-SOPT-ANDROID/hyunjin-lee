@@ -16,12 +16,13 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.sopt.now.compose.Navigation.BottomNavigationBar
-import com.sopt.now.compose.ui.screen.MainScreen
+import com.sopt.now.compose.ui.MainScreen.MainScreen
 import com.sopt.now.compose.ui.theme.NOWSOPTAndroidTheme
 
 class MainActivity : ComponentActivity() {
@@ -53,7 +54,7 @@ fun MainScaffold(navController: NavHostController, content: @Composable () -> Un
                     titleContentColor = MaterialTheme.colorScheme.primary,
                 ),
                 title = {
-                    Text("♡ SOPT ♡")
+                    Text(stringResource(id = R.string.top_bar))
                 }
             )
         },
