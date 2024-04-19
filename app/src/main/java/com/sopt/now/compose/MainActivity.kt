@@ -20,6 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.sopt.now.compose.Navigation.BottomNavigationBar
 import com.sopt.now.compose.ui.MainScreen.MainScreen
@@ -46,6 +47,9 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScaffold(navController: NavHostController, content: @Composable () -> Unit) {
+    val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
+    val showBottomBar = currentRoute != "login" && currentRoute != "signup"
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -59,7 +63,9 @@ fun MainScaffold(navController: NavHostController, content: @Composable () -> Un
             )
         },
         bottomBar = {
-            BottomNavigationBar(navController = navController)
+            if (showBottomBar) {
+                BottomNavigationBar(navController = navController)
+            }
         }
     ) { innerPadding ->
         Column(
