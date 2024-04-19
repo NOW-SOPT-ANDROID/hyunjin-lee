@@ -33,7 +33,7 @@ class LoginActivity : AppCompatActivity() {
 
         // 자동 로그인
         loginObserver()
-        
+
         // 로그인 버튼 클릭 시
         binding.btLoginButton.setOnClickListener {
             handleLoginClick()
@@ -45,8 +45,14 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        setUserData() // 사용자 데이터를 다시 설정
+    }
+
     private fun setUserData() {
         val userData = viewModel.getUserInfo()
+        Log.d("login", "$userData")
         binding.etLoginId.setText(userData.id) // 로그인 화면에 사용자 ID를 자동으로 작성
         binding.etLoginPw.setText(userData.pw) // 로그인 화면에 사용자 PW를 자동으로 작성
     }
@@ -86,10 +92,5 @@ class LoginActivity : AppCompatActivity() {
             startActivity(it)
         }
         finish()
-    }
-
-    // 상수화
-    companion object {
-        const val USER_DATA = "user_data"
     }
 }
