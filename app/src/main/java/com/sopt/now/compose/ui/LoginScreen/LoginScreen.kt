@@ -94,7 +94,7 @@ fun LoginScreen(
         // signup button
         TextButton(
             onClick = { /* 클릭 시 수행될 동작 */
-                Toast.makeText(context, R.string.SIGNUP.toString(), Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, R.string.SIGNUP, Toast.LENGTH_SHORT).show()
                 navController.navigate("signup")
             },
             modifier = Modifier
