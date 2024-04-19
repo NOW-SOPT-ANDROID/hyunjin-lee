@@ -12,9 +12,6 @@ import com.sopt.now.databinding.ActivitySignupBinding
 class SignUpActivity : AppCompatActivity()  {
     private val binding by lazy { ActivitySignupBinding.inflate(layoutInflater) }
     private val viewModel: SignUpViewModel by viewModels()
-    companion object {
-        const val USER_DATA = "user_data"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
