@@ -16,20 +16,14 @@ import com.sopt.now.compose.ui.SignupScreen.UserViewModel
 
 @Composable
 fun Navigation(navController: NavHostController) {
-
     val userViewModel: UserViewModel = viewModel(LocalContext.current as ViewModelStoreOwner)
 
     NavHost(navController = navController, startDestination = "login") {
         composable("home") {
-            MainScaffold(navController = navController) {
-                HomeScreen()
-            }
+            HomeScreen()
         }
         composable("mypage") {
-            MainScaffold(navController = navController) {
-                // UserViewModel에서 사용자 정보를 가져와서 MyPageScreen에 제공
-                MypageScreen(navController = navController, userViewModel = userViewModel)
-            }
+            MypageScreen(userViewModel = userViewModel)
         }
         composable("login") {
             // LoginScreen에서는 UserViewModel을 사용하여 로그인 성공 후 사용자 정보를 저장
