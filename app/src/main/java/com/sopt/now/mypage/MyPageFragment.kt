@@ -1,8 +1,6 @@
 package com.sopt.now.mypage
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,8 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.sopt.now.MyApplication
-import com.sopt.now.PreferenceUtil
-import com.sopt.now.data.UserData
 import com.sopt.now.databinding.FragmentMypageBinding
 import com.sopt.now.login.LoginActivity
 import com.sopt.now.main.MainViewModel
