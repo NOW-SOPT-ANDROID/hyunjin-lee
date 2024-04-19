@@ -2,21 +2,13 @@ package com.sopt.now.main
 
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.addCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.sopt.now.R
-import com.sopt.now.data.UserData
 import com.sopt.now.databinding.ActivityMainBinding
 import com.sopt.now.home.HomeFragment
-import com.sopt.now.login.LoginActivity
 import com.sopt.now.mypage.MyPageFragment
-import kotlinx.coroutines.channels.BufferOverflow
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.drop
-import kotlinx.coroutines.flow.scan
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
@@ -32,10 +24,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        replaceFragment(HomeFragment())
         // 바텀 네비게이션 클릭 이벤트 처리 함수 호출
         setBottomNavigation()
-
-
     }
 
     // 뒤로가기 두 번 누르면 종료
@@ -73,7 +64,3 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 }
-
-
-
-
