@@ -28,7 +28,6 @@ import com.sopt.now.compose.ui.SignupScreen.UserViewModel
 fun MypageScreen(
     userViewModel: UserViewModel,
     modifier: Modifier = Modifier,
-    navController: NavController,
 ) {
     Column(
         modifier = modifier
