@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.sopt.now.data.Friend
+import com.sopt.now.data.UserData
 import com.sopt.now.databinding.FragmentHomeBinding
 import com.sopt.now.main.MainViewModel
 
@@ -17,6 +19,7 @@ class HomeFragment: Fragment() {
     private val binding get() = _binding!!
     private val viewModel by viewModels<HomeViewModel>()
     private val mainViewModel: MainViewModel by activityViewModels() // MainViewModel에서 userInfo 가져옴
+    private val multiTypeAdapter = MultiTypeAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,15 +31,15 @@ class HomeFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupRecyclerView()
+        observeViewModel()
     }
 
-    private fun setupRecyclerView(){
-        // MultiTypeAdapter 초기화
-        val multiTypeAdapter = MultiTypeAdapter()
-        val userData = mainViewModel.getUserInfo()
-
-        // 사용자 데이터와 친구 목록을 합쳐서 하나의 리스트로 만듭니다.
+    private fun observeViewModel() {
+        mainViewModel.userInfo.observe(viewLifecycleOwner) { userData ->
+            setupRecyclerView(userData)
+        }
+    }
+    private fun setupRecyclerView(userData: UserData){
         val items = mutableListOf<Any>().apply {
             // UserData를 추가
             add(userData)
@@ -47,7 +50,7 @@ class HomeFragment: Fragment() {
         Log.d("home", "$items")
 
         // RecyclerView 설정
-        binding.rvMyprofile.apply {
+        binding.rvMyprofile.run {
             layoutManager = LinearLayoutManager(context)
             adapter = multiTypeAdapter
         }
