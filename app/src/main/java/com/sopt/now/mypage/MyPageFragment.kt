@@ -23,11 +23,6 @@ class MyPageFragment : Fragment(){
         get() = requireNotNull(_binding)
     private val viewModel: MainViewModel by activityViewModels()
 
-    companion object {
-        const val IS_AUTO_LOGIN = "is_auto_login"
-    }
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
