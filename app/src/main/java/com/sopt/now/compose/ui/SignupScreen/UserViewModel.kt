@@ -1,11 +1,12 @@
 package com.sopt.now.compose.ui.SignupScreen
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class UserViewModel: ViewModel() {
-    val userId = MutableLiveData("")
-    val userPw = MutableLiveData("")
-    val userName = MutableLiveData("")
-    val userMbti = MutableLiveData("")
+    var userId = mutableStateOf("")
+    var userPw = mutableStateOf("")
+    var userName = mutableStateOf("")
+    var userMbti = mutableStateOf("")
 }

@@ -60,8 +60,10 @@ fun LoginScreen(
         )
 
         TextField(
-            value = userViewModel.userId.value.toString(),
-            onValueChange = { userViewModel.userId.value = it },
+            value = userViewModel.userId.value, // MutableLiveData 대신 MutableState 사용
+            onValueChange = { newValue ->
+                userViewModel.userId.value = newValue
+            },
             modifier = Modifier
                 .fillMaxWidth(),
             label = { Text(stringResource(id = R.string.input_ID)) },
@@ -78,8 +80,10 @@ fun LoginScreen(
         )
 
         TextField(
-            value = userViewModel.userPw.value.toString(),
-            onValueChange = { userViewModel.userPw.value = it },
+            value = userViewModel.userPw.value, // MutableLiveData 대신 MutableState 사용
+            onValueChange = { newValue ->
+                userViewModel.userPw.value = newValue
+            },
             modifier = Modifier
                 .fillMaxWidth(),
             label = { Text(stringResource(id = R.string.input_PW)) },
