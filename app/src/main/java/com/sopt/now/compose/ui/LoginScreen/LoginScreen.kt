@@ -2,30 +2,30 @@ package com.sopt.now.compose.ui.LoginScreen
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.sopt.now.compose.R
+import com.sopt.now.compose.component.AppButton
 import com.sopt.now.compose.ui.SignupScreen.UserViewModel
+import com.sopt.now.compose.util.modifier.noRippleClickable
 
 @Composable
 fun LoginScreen(
@@ -34,10 +34,12 @@ fun LoginScreen(
     navController: NavController,
 ) {
     val context = LocalContext.current
+    var expanded = remember { mutableStateOf(false) }
 
     Column(
-        modifier = modifier
-            .fillMaxSize()
+        modifier = Modifier.noRippleClickable {
+            expanded.value = !expanded.value
+        }.fillMaxSize()
             .padding(horizontal = 40.dp)
     ) {
         // 20.dp만큼 빈공간 추가
@@ -51,8 +53,7 @@ fun LoginScreen(
             fontSize = 20.sp
         )
 
-        // 1.5가중치 만큼 빈공간 추가
-        Spacer(modifier = Modifier.weight(1f))
+        Spacer(modifier = Modifier.weight(0.5f))
 
         // id
         Text(
@@ -92,54 +93,41 @@ fun LoginScreen(
             visualTransformation = PasswordVisualTransformation(), // 비밀번호 마스킹
         )
 
-        // 2 가중치 만큼 빈공간 추가
-        Spacer(modifier = Modifier.weight(2f))
+        Spacer(modifier = Modifier.weight(1.0f))
 
         // signup button
-        TextButton(
-            onClick = { /* 클릭 시 수행될 동작 */
+        AppButton(
+            text = stringResource(id = R.string.SIGNUP),
+            onClick = {
                 Toast.makeText(context, R.string.SIGNUP, Toast.LENGTH_SHORT).show()
                 navController.navigate("signup") {
-                    // BackStack 모두 비우고 home 이동.
                     popUpTo("login") { inclusive = true }
                 }
             },
-            modifier = Modifier
-                .fillMaxWidth(),
-        ) {
-            Text(
-                text = stringResource(id = R.string.SIGNUP),
-                fontWeight = FontWeight.Bold,
-                fontSize = 13.sp,
-                textDecoration = TextDecoration.Underline,
-            )
-        }
+            padding = PaddingValues(vertical = 10.dp)
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
 
         // login button
-        Button(
+        AppButton(
+            text = stringResource(id = R.string.LOGIN),
             onClick = {
-                /* 클릭 시 수행될 동작 */
-                if (isValidLogin(userViewModel.userId.value.toString(), userViewModel.userPw.value.toString(),
-                        userViewModel.userId.value.toString(), userViewModel.userPw.value.toString())
+                if (isValidLogin(userViewModel.userId.value, userViewModel.userPw.value,
+                        userViewModel.userId.value, userViewModel.userPw.value)
                 ) {
-                    // 로그인 성공 시
                     Toast.makeText(context, "로그인 성공", Toast.LENGTH_SHORT).show()
                     navController.navigate("home") {
-                        // BackStack 모두 비우고 home 이동.
                         popUpTo("login") { inclusive = true }
                     }
                 } else {
-                    // 로그인 실패 시
                     Toast.makeText(context, "로그인 실패", Toast.LENGTH_SHORT).show()
                 }
             },
-            modifier = Modifier
-                .padding(10.dp)
-                .fillMaxWidth(),
-            shape = RoundedCornerShape(30.dp)
-        ) {
-            Text(stringResource(id = R.string.LOGIN), color = Color.White)
-        }
+            padding = PaddingValues(vertical = 10.dp)
+        )
+
+        Spacer(modifier = Modifier.weight(0.5f))
     }
 }
 
