@@ -95,7 +95,10 @@ fun LoginScreen(
         TextButton(
             onClick = { /* 클릭 시 수행될 동작 */
                 Toast.makeText(context, R.string.SIGNUP, Toast.LENGTH_SHORT).show()
-                navController.navigate("signup")
+                navController.navigate("signup") {
+                    // BackStack 모두 비우고 home 이동.
+                    popUpTo("login") { inclusive = true }
+                }
             },
             modifier = Modifier
                 .fillMaxWidth(),
@@ -117,7 +120,10 @@ fun LoginScreen(
                 ) {
                     // 로그인 성공 시
                     Toast.makeText(context, "로그인 성공", Toast.LENGTH_SHORT).show()
-                    navController.navigate("mypage")
+                    navController.navigate("home") {
+                        // BackStack 모두 비우고 home 이동.
+                        popUpTo("login") { inclusive = true }
+                    }
                 } else {
                     // 로그인 실패 시
                     Toast.makeText(context, "로그인 실패", Toast.LENGTH_SHORT).show()

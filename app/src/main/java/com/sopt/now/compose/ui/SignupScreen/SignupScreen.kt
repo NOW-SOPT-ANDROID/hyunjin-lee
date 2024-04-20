@@ -158,7 +158,10 @@ fun SignupScreen(
                     userViewModel.userMbti.value = userMbti
 
                     Toast.makeText(context, "회원가입성공", Toast.LENGTH_SHORT).show()
-                    navController.navigate("login")
+                    navController.navigate("login") {
+                        // BackStack 모두 비우고 home 이동.
+                        popUpTo("signup") { inclusive = true }
+                    }
                 }
             },
             modifier = modifier
