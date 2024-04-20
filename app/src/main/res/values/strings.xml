@@ -29,5 +29,5 @@
     <string name="MBTI_TEXT">entj</string>
     <string name="input_MBTI">MBTI를 입력해주세요</string>
 
-
+    <string name="BACK_PRESSED">뒤로가기를 한번 더 누르면 종료됩니다.</string>
 </resources>
