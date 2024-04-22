@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NOWSOPTAndroid"
+        android:name="com.sopt.now.compose.MyApplication"
         tools:targetApi="31">
         <activity
             android:name=".MainActivity"
