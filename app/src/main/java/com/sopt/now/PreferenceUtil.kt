@@ -7,7 +7,7 @@ import com.sopt.now.data.UserData
 
 class PreferenceUtil(context: Context) {
     private val prefs: SharedPreferences =
-        context.getSharedPreferences("prefs_name", Context.MODE_PRIVATE)
+        context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
     fun getUserData(key: String): UserData {
         val userJson = prefs.getString(key, null)
@@ -28,5 +28,9 @@ class PreferenceUtil(context: Context) {
 
     fun clearUserData() {
         prefs.edit().clear().apply()
+    }
+
+    companion object {
+        const val PREFS_NAME = "prefs_name"
     }
 }
