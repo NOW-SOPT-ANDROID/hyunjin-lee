@@ -11,8 +11,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -24,17 +27,21 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.sopt.now.compose.R
 import com.sopt.now.compose.component.AppButton
-import com.sopt.now.compose.ui.SignupScreen.UserViewModel
 import com.sopt.now.compose.util.modifier.noRippleClickable
 
 @Composable
 fun LoginScreen(
-    userViewModel: UserViewModel,
+    loginViewModel: LoginViewModel,
     modifier: Modifier = Modifier,
     navController: NavController,
 ) {
     val context = LocalContext.current
     var expanded = remember { mutableStateOf(false) }
+    val userData = loginViewModel.getUserInfo()
+
+    // 기본값으로 회원가입에서 받아온 값을 사용하되, 사용자 입력을 통해 업데이트될 수 있도록 remember 사용
+    var userId by rememberSaveable { mutableStateOf(userData.id) }
+    var userPw by rememberSaveable { mutableStateOf(userData.pw) }
 
     Column(
         modifier = Modifier.noRippleClickable {
@@ -61,10 +68,8 @@ fun LoginScreen(
         )
 
         TextField(
-            value = userViewModel.userId.value, // MutableLiveData 대신 MutableState 사용
-            onValueChange = { newValue ->
-                userViewModel.userId.value = newValue
-            },
+            value = userId,
+            onValueChange = { userId = it },
             modifier = Modifier
                 .fillMaxWidth(),
             label = { Text(stringResource(id = R.string.input_ID)) },
@@ -81,10 +86,8 @@ fun LoginScreen(
         )
 
         TextField(
-            value = userViewModel.userPw.value, // MutableLiveData 대신 MutableState 사용
-            onValueChange = { newValue ->
-                userViewModel.userPw.value = newValue
-            },
+            value = userPw,
+            onValueChange = { userPw = it },
             modifier = Modifier
                 .fillMaxWidth(),
             label = { Text(stringResource(id = R.string.input_PW)) },
@@ -113,9 +116,12 @@ fun LoginScreen(
         AppButton(
             text = stringResource(id = R.string.LOGIN),
             onClick = {
-                if (isValidLogin(userViewModel.userId.value, userViewModel.userPw.value,
-                        userViewModel.userId.value, userViewModel.userPw.value)
-                ) {
+                val(inputId, inputPw) = Pair(
+                    userData.id,
+                    userData.pw
+                )
+
+                if (loginViewModel.loginValid(inputId, inputPw, userData)) {
                     Toast.makeText(context, "로그인 성공", Toast.LENGTH_SHORT).show()
                     navController.navigate("home") {
                         popUpTo("login") { inclusive = true }
@@ -129,9 +135,4 @@ fun LoginScreen(
 
         Spacer(modifier = Modifier.weight(0.5f))
     }
-}
-
-// 로그인 검증 함수
-fun isValidLogin(userId: String?, userPw: String?, getId: String, getPw: String): Boolean {
-    return userId != "" && userPw != "" && userId == getId && userPw == getPw
 }
