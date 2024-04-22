@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
                         replaceFragment(HomeFragment())
                     }
 
-                    R.id.menu_search -> { // my page 선택
+                    R.id.menu_search -> { // search 선택
                         replaceFragment(SearchFragment())
                     }
 

@@ -46,11 +46,10 @@ class HomeFragment: Fragment() {
             // 친구 목록을 추가
             addAll(viewModel.mockFriendList)
         }
-        multiTypeAdapter.setItems(items)
-        Log.d("home", "$items")
+        multiTypeAdapter.submitList(items)
 
         // RecyclerView 설정
-        binding.rvMyprofile.run {
+        with(binding.rvMyprofile) {
             layoutManager = LinearLayoutManager(context)
             adapter = multiTypeAdapter
         }
