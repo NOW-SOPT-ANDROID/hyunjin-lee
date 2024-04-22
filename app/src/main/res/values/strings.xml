@@ -18,6 +18,7 @@
     <string name="LOGIN">로그인</string>
     <string name="SUCCESS_LOGIN">로그인 성공</string>
     <string name="FAIL_LOGIN">로그인 실패</string>
+    <string name="LOGOUT">로그아웃</string>
 
     <string name="MYPAGE">마이페이지</string>
     <string name="NICKNAME">닉네임</string>
@@ -30,4 +31,9 @@
     <string name="input_MBTI">MBTI를 입력해주세요</string>
 
     <string name="BACK_PRESSED">뒤로가기를 한번 더 누르면 종료됩니다.</string>
+
+    <string name="isvalid_id">아이디는 6~10 글자여야 합니다.</string>
+    <string name="isvalid_pw">비밀번호는 8~12 글자여야 합니다.</string>
+    <string name="isvalid_name">닉네임은 한 글자 이상이어야 하며, 공백으로만 이루어질 수 없습니다.</string>
+    <string name="isvalid_mbti">MBTI를 올바르게 입력해주세요.</string>
 </resources>
