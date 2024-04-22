@@ -15,11 +15,6 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels()
     private var backPressedTime: Long = 0
 
-    companion object {
-        // 앱이 종료되는 최대 시간
-        const val BACK_PRESSED_DURATION = 2000L
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -62,5 +57,10 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(binding.fcvHome.id, fragment)
             .commit()
+    }
+
+    companion object {
+        // 앱이 종료되는 최대 시간
+        const val BACK_PRESSED_DURATION = 2000L
     }
 }

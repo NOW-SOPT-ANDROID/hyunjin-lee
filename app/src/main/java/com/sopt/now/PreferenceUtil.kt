@@ -11,11 +11,7 @@ class PreferenceUtil(context: Context) {
 
     fun getUserData(key: String): UserData {
         val userJson = prefs.getString(key, null)
-        return if (userJson != null) {
-            Gson().fromJson(userJson, UserData::class.java)
-        } else {
-            UserData("", "", "", "", 0)
-        }
+        return Gson().fromJson(userJson, UserData::class.java) ?: UserData("", "", "", "", 0)
     }
 
     fun setString(key: String, str: String) {
