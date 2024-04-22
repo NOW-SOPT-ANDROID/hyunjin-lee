@@ -1,4 +1,4 @@
-package com.sopt.now.compose.data
+package com.sopt.now.compose.Navigation
 
 import androidx.compose.ui.graphics.vector.ImageVector
 

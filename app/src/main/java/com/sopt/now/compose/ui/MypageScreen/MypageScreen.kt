@@ -2,6 +2,7 @@ package com.sopt.now.compose.ui.MypageScreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,16 +21,18 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.sopt.now.compose.MyApplication
 import com.sopt.now.compose.R
-import com.sopt.now.compose.ui.SignupScreen.UserViewModel
-
+import com.sopt.now.compose.component.AppButton
 
 @Composable
 fun MypageScreen(
-    userViewModel: UserViewModel,
+    myPageViewModel: MyPageViewModel,
     modifier: Modifier = Modifier,
     navController: NavController,
 ) {
+    val userData = myPageViewModel.getUserInfo()
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -67,7 +70,7 @@ fun MypageScreen(
         )
 
         Text(
-            text = userViewModel.userId.value.toString(),
+            text = userData.id,
             fontSize = 20.sp,
             modifier = modifier.fillMaxWidth(),
             textAlign = TextAlign.Left
@@ -85,7 +88,7 @@ fun MypageScreen(
         )
 
         Text(
-            text = userViewModel.userPw.value.toString(),
+            text = userData.pw,
             fontSize = 20.sp,
             modifier = modifier.fillMaxWidth(),
             textAlign = TextAlign.Left
@@ -103,7 +106,7 @@ fun MypageScreen(
         )
 
         Text(
-            text = userViewModel.userName.value.toString(),
+            text = userData.name,
             fontSize = 20.sp,
             modifier = modifier.fillMaxWidth(),
             textAlign = TextAlign.Left
@@ -121,10 +124,23 @@ fun MypageScreen(
         )
 
         Text(
-            text = userViewModel.userMbti.value.toString(),
+            text = userData.mbti,
             fontSize = 20.sp,
             modifier = modifier.fillMaxWidth(),
             textAlign = TextAlign.Left
+        )
+        Spacer(modifier = Modifier.height(15.dp))
+
+        // 로그아웃 버튼
+        AppButton(
+            text = stringResource(id = R.string.LOGOUT),
+            onClick = {
+                MyApplication.prefs.clearUserData()
+                navController.navigate("login") {
+                    popUpTo("mypage") { inclusive = true }
+                }
+            },
+            padding = PaddingValues(vertical = 10.dp)
         )
     }
 }

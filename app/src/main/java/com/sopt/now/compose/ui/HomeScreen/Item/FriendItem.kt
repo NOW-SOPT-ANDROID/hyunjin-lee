@@ -1,4 +1,4 @@
-package com.sopt.now.compose.ui.Item
+package com.sopt.now.compose.ui.HomeScreen.Item
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -16,55 +16,55 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.sopt.now.compose.data.Friend
+import com.sopt.now.compose.data.UserProfile
 
-val friendList = listOf<Friend>(
-    Friend(
+val friendList = listOf<UserProfile.Friend>(
+    UserProfile.Friend(
         profileImage = Icons.Filled.Person,
         name = "이의경",
         selfDescription = "다들 빨리 끝내고 뒤풀이 가고 싶지?",
     ),
-    Friend(
+    UserProfile.Friend(
         profileImage = Icons.Filled.Person,
         name = "우상욱",
         selfDescription = "나보다 안드 잘하는 사람 있으면 나와봐",
     ),
-    Friend(
+    UserProfile.Friend(
         profileImage = Icons.Filled.Person,
         name = "배지현",
         selfDescription = "표정 풀자 ^^",
     ),
-    Friend(
+    UserProfile.Friend(
         profileImage = Icons.Filled.Person,
         name = "강문수",
         selfDescription = "오빠 얼른 와서 신랄한 비판 ㄱㄱ",
     ),
-    Friend(
+    UserProfile.Friend(
         profileImage = Icons.Filled.Person,
         name = "이유빈",
         selfDescription = "난 언제쯤 유빈이만큼 잘할 수 있을까,,",
     ),
-    Friend(
+    UserProfile.Friend(
         profileImage = Icons.Filled.Person,
         name = "이나경",
         selfDescription = "나경아 우리 다음 세미나때는 볼 수 있는 거지?",
     ),
-    Friend(
+    UserProfile.Friend(
         profileImage = Icons.Filled.Person,
         name = "김언지",
         selfDescription = "언지야 사랑해",
     ),
-    Friend(
+    UserProfile.Friend(
         profileImage = Icons.Filled.Person,
         name = "손민재",
         selfDescription = "큐브 좀 그만해라",
     ),
-    Friend(
+    UserProfile.Friend(
         profileImage = Icons.Filled.Person,
         name = "이석준",
         selfDescription = "이석찬이랑 형제지?",
     ),
-    Friend(
+    UserProfile.Friend(
         profileImage = Icons.Filled.Person,
         name = "이석찬",
         selfDescription = "이석준이랑 형제지?",
@@ -72,7 +72,7 @@ val friendList = listOf<Friend>(
 )
 
 @Composable
-fun FriendProfileItem(friend: Friend) {
+fun FriendProfileItem(friend: UserProfile.Friend) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
