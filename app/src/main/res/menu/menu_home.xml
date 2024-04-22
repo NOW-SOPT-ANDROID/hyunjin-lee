@@ -10,6 +10,12 @@
         android:icon="@drawable/ic_home_white_24"
         android:title="홈" />
 
+    <!-- Search -->
+    <item
+        android:id="@+id/menu_search"
+        android:icon="@drawable/ic_home_white_24"
+        android:title="탐색" />
+
     <!-- MyPage -->
     <item
         android:id="@+id/menu_mypage"
