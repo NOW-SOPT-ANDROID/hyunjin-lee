@@ -8,41 +8,29 @@ import com.google.android.material.snackbar.Snackbar
 import com.sopt.now.R
 import com.sopt.now.data.UserData
 import com.sopt.now.databinding.ActivitySignupBinding
-import com.sopt.now.login.LoginActivity
 
 class SignUpActivity : AppCompatActivity()  {
     private val binding by lazy { ActivitySignupBinding.inflate(layoutInflater) }
     private val viewModel: SignUpViewModel by viewModels()
-    companion object {
-        const val USER_DATA = "user_data"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setSignupResult()
-        // 클릭리스너 설정
+        setContentView(binding.root)
+
         binding.btSignupButton.setOnClickListener {
             val user = getUserInfo()
-            viewModel.signUp(user)
+            setSignupResult(user)
         }
-
-        setContentView(binding.root)
     }
 
-    private fun setSignupResult() {
-        viewModel.signUpResult.observe(this) { validationResult ->
-            if (validationResult == null) {
-                viewModel.user.value?.let { user ->
-                    Snackbar.make(binding.root, "회원가입 성공", Snackbar.LENGTH_SHORT).show()
-                    val resultIntent = Intent().apply {
-                        putExtra(USER_DATA, user) // User 객체를 Intent에 포함
-                    }
-                    setResult(RESULT_OK, resultIntent)
-                    finish()
-                }
-            } else {
-                Snackbar.make(binding.root, this.getString(validationResult), Snackbar.LENGTH_SHORT).show()
-            }
+    private fun setSignupResult(user: UserData) {
+        val validateSignUpData = viewModel.validateSignUp(user)
+        if(validateSignUpData == null){
+            Snackbar.make(binding.root, "회원가입 성공", Snackbar.LENGTH_SHORT).show()
+            viewModel.signUp(user)
+            finish()
+        } else{
+            Snackbar.make(binding.root, this.getString(validateSignUpData), Snackbar.LENGTH_SHORT).show()
         }
     }
 

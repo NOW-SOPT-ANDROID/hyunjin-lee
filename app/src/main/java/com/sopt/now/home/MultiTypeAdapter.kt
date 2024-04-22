@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.sopt.now.R
 import com.sopt.now.data.Friend
 import com.sopt.now.data.UserData
 import com.sopt.now.databinding.ItemFriendBinding
