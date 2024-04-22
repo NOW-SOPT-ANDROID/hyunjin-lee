@@ -28,7 +28,7 @@
         android:textSize="20dp"
         android:layout_marginTop="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_signup_title" />
+        app:layout_constraintTop_toBottomOf="@id/tv_signup_title" />
 
     <EditText
         android:id="@+id/et_signup_id"
@@ -49,7 +49,7 @@
         android:textSize="20dp"
         android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_signup_id" />
+        app:layout_constraintTop_toBottomOf="@id/et_signup_id" />
 
     <EditText
         android:id="@+id/et_signup_pw"
@@ -60,7 +60,7 @@
         android:singleLine="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_signup_pw" />
+        app:layout_constraintTop_toBottomOf="@id/tv_signup_pw" />
 
     <TextView
         android:id="@+id/tv_signup_nickname"
@@ -70,7 +70,7 @@
         android:textSize="20dp"
         android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_signup_pw" />
+        app:layout_constraintTop_toBottomOf="@id/et_signup_pw" />
 
     <EditText
         android:id="@+id/et_signup_nickname"
@@ -81,7 +81,7 @@
         android:singleLine="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_signup_nickname" />
+        app:layout_constraintTop_toBottomOf="@id/tv_signup_nickname" />
 
     <TextView
         android:id="@+id/tv_signup_mbti"
@@ -91,7 +91,7 @@
         android:textSize="20dp"
         android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_signup_nickname" />
+        app:layout_constraintTop_toBottomOf="@id/et_signup_nickname" />
 
     <EditText
         android:id="@+id/et_signup_mbti"
@@ -102,7 +102,7 @@
         android:singleLine="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_signup_mbti" />
+        app:layout_constraintTop_toBottomOf="@id/tv_signup_mbti" />
 
     <Button
         android:id="@+id/bt_signup_button"
@@ -113,7 +113,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_signup_mbti"/>
+        app:layout_constraintTop_toBottomOf="@id/et_signup_mbti"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
