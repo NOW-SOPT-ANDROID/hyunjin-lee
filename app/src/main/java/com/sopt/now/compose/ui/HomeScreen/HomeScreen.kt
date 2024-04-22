@@ -3,10 +3,10 @@ package com.sopt.now.compose.ui.HomeScreen
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
-import com.sopt.now.compose.ui.Item.FriendProfileItem
-import com.sopt.now.compose.ui.Item.MyProfileItem
-import com.sopt.now.compose.ui.Item.friendList
-import com.sopt.now.compose.ui.Item.myprofile
+import com.sopt.now.compose.ui.HomeScreen.Item.FriendProfileItem
+import com.sopt.now.compose.ui.HomeScreen.Item.MyProfileItem
+import com.sopt.now.compose.ui.HomeScreen.Item.friendList
+import com.sopt.now.compose.ui.HomeScreen.Item.myprofile
 
 @Composable
 fun HomeScreen() {

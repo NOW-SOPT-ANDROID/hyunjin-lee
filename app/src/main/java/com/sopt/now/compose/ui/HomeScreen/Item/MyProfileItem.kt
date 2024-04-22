@@ -1,4 +1,4 @@
-package com.sopt.now.compose.ui.Item
+package com.sopt.now.compose.ui.HomeScreen.Item
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
