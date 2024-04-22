@@ -11,11 +11,7 @@ class MainViewModel : ViewModel() {
     private val _userInfo = MutableLiveData<UserData>()
     val userInfo: LiveData<UserData> = _userInfo
 
-    init {
-        loadUserInfo()
-    }
-
-    private fun loadUserInfo() {
+    fun loadUserInfo() {
         val userData = MyApplication.prefs.getUserData(PREF_KEY)
         _userInfo.value = userData
     }

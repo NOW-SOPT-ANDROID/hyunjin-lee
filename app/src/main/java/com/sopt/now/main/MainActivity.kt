@@ -19,6 +19,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        viewModel.loadUserInfo()
+
         replaceFragment(HomeFragment())
         // 바텀 네비게이션 클릭 이벤트 처리 함수 호출
         setBottomNavigation()
