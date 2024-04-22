@@ -29,12 +29,12 @@ class HomeViewModel : ViewModel() {
         Friend(
             profileImage = R.drawable.ic_person_black_24,
             name = "이유빈",
-            selfDescription = "난 언제쯤 유빈이만큼 잘할 수 있을까,,",
+            selfDescription = "유빈아 보고싶어",
         ),
         Friend(
             profileImage = R.drawable.ic_person_black_24,
             name = "이나경",
-            selfDescription = "나경아 우리 다음 세미나때는 볼 수 있는 거지?",
+            selfDescription = "나경아 엔씨가 이길 거 같아?",
         ),
         Friend(
             profileImage = R.drawable.ic_person_black_24,
