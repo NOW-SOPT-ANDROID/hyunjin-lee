@@ -26,8 +26,6 @@ class LoginViewModel : ViewModel(){
 
     fun loginValid(id: String, pw: String, userData: UserData): Boolean {
         when {
-            id.isBlank() -> return false
-            pw.isBlank() -> return false
             id == userData.id && pw == userData.pw -> {
                 MyApplication.prefs.setBoolean(LOGIN_STATE_KEY, true)
                 setUserInfo()
