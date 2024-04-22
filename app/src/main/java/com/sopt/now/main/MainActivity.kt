@@ -9,6 +9,7 @@ import com.sopt.now.R
 import com.sopt.now.databinding.ActivityMainBinding
 import com.sopt.now.home.HomeFragment
 import com.sopt.now.mypage.MyPageFragment
+import com.sopt.now.search.SearchFragment
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
@@ -44,6 +45,10 @@ class MainActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.menu_home-> { // home 선택
                     replaceFragment(HomeFragment())
+                    true
+                }
+                R.id.menu_search-> { // my page 선택
+                    replaceFragment(SearchFragment())
                     true
                 }
                 R.id.menu_mypage-> { // my page 선택
