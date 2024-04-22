@@ -47,7 +47,6 @@ class HomeFragment: Fragment() {
             addAll(viewModel.mockFriendList)
         }
         multiTypeAdapter.setItems(items)
-        Log.d("home", "$items")
 
         // RecyclerView 설정
         with(binding.rvMyprofile) {
