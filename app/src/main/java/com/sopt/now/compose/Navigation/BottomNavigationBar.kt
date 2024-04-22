@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import com.sopt.now.compose.R
+import com.sopt.now.compose.data.BottomNavigationItem
 
 @Composable
 fun BottomNavigationBar(

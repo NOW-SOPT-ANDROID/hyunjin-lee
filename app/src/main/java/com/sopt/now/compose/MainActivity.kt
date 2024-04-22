@@ -3,7 +3,6 @@ package com.sopt.now.compose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,25 +20,23 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.sopt.now.compose.Navigation.BottomNavigationBar
-import com.sopt.now.compose.ui.LoginScreen.LoginViewModel
 import com.sopt.now.compose.ui.MainScreen.MainScreen
 import com.sopt.now.compose.ui.theme.NOWSOPTAndroidTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val viewModel: LoginViewModel by viewModels()
 
         setContent {
             NOWSOPTAndroidTheme {
+                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainScreen(loginViewModel = viewModel)
+                    MainScreen()
                 }
             }
         }
@@ -49,10 +46,6 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScaffold(navController: NavHostController, content: @Composable () -> Unit) {
-    val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
-    val showBottomBar = currentRoute != "login" && currentRoute != "signup"
-
-    BackOnPressed()
     Scaffold(
         topBar = {
             TopAppBar(
@@ -66,9 +59,7 @@ fun MainScaffold(navController: NavHostController, content: @Composable () -> Un
             )
         },
         bottomBar = {
-            if (showBottomBar) {
-                BottomNavigationBar(navController = navController)
-            }
+            BottomNavigationBar(navController = navController)
         }
     ) { innerPadding ->
         Column(
