@@ -56,6 +56,10 @@ class HomeFragment: Fragment() {
         }
     }
 
+    fun scrollToTop() {
+        binding.rvMyprofile.scrollToPosition(0)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null // 메모리 누수 방지를 위해 뷰 바인딩 참조 해제

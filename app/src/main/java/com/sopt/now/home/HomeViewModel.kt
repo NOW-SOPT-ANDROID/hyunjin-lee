@@ -61,5 +61,35 @@ class HomeViewModel : ViewModel() {
             name = "신민석",
             selfDescription = "운팀 회식 안빠질 거지?",
         ),
+        Friend(
+            profileImage = R.drawable.ic_person_black_24,
+            name = "이석준",
+            selfDescription = "이석찬이랑 형제지?",
+        ),
+        Friend(
+            profileImage = R.drawable.ic_person_black_24,
+            name = "이석찬",
+            selfDescription = "이석준이랑 형제지?",
+        ),
+        Friend(
+            profileImage = R.drawable.ic_person_black_24,
+            name = "신민석",
+            selfDescription = "운팀 회식 안빠질 거지?",
+        ),
+        Friend(
+            profileImage = R.drawable.ic_person_black_24,
+            name = "이석준",
+            selfDescription = "이석찬이랑 형제지?",
+        ),
+        Friend(
+            profileImage = R.drawable.ic_person_black_24,
+            name = "이석찬",
+            selfDescription = "이석준이랑 형제지?",
+        ),
+        Friend(
+            profileImage = R.drawable.ic_person_black_24,
+            name = "신민석",
+            selfDescription = "운팀 회식 안빠질 거지?",
+        ),
     )
 }

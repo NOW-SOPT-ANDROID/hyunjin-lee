@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val viewModel: MainViewModel by viewModels()
     private var backPressedTime: Long = 0
+    private var lastSelectedItemId = R.id.menu_home // 초기 선택된 탭 지정
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,22 +42,37 @@ class MainActivity : AppCompatActivity() {
 
     private fun setBottomNavigation() {
         // 바텀 네비게이션 아이템 선택 리스너 설정
-        binding.bnvHome.setOnItemSelectedListener{
-            when (it.itemId) {
-                R.id.menu_home-> { // home 선택
-                    replaceFragment(HomeFragment())
-                    true
+        binding.bnvHome.setOnItemSelectedListener{ it ->
+            if (it.itemId == lastSelectedItemId) {
+                // 같은 탭을 다시 선택한 경우
+                scrollToTop()
+            } else {
+                // 다른 탭을 선택한 경우
+                when (it.itemId) {
+                    R.id.menu_home -> { // home 선택
+                        replaceFragment(HomeFragment())
+                    }
+
+                    R.id.menu_search -> { // my page 선택
+                        replaceFragment(SearchFragment())
+                    }
+
+                    R.id.menu_mypage -> { // my page 선택
+                        replaceFragment(MyPageFragment())
+                    }
+
+                    else -> false
                 }
-                R.id.menu_search-> { // my page 선택
-                    replaceFragment(SearchFragment())
-                    true
-                }
-                R.id.menu_mypage-> { // my page 선택
-                    replaceFragment(MyPageFragment())
-                    true
-                }
-                else -> false
+                lastSelectedItemId = it.itemId
             }
+            true
+        }
+    }
+
+    private fun scrollToTop() {
+        val fragment = supportFragmentManager.findFragmentById(binding.fcvHome.id)
+        if (fragment is HomeFragment) {
+            fragment.scrollToTop()
         }
     }
 
