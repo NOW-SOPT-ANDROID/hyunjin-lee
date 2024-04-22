@@ -69,6 +69,26 @@ val friendList = listOf<UserProfile.Friend>(
         name = "이석찬",
         selfDescription = "이석준이랑 형제지?",
     ),
+    UserProfile.Friend(
+        profileImage = Icons.Filled.Person,
+        name = "wave to earth",
+        selfDescription = "이석준이랑 형제지?",
+    ),
+    UserProfile.Friend(
+        profileImage = Icons.Filled.Person,
+        name = "touched",
+        selfDescription = "이석준이랑 형제지?",
+    ),
+    UserProfile.Friend(
+        profileImage = Icons.Filled.Person,
+        name = "rockstar",
+        selfDescription = "이석준이랑 형제지?",
+    ),
+    UserProfile.Friend(
+        profileImage = Icons.Filled.Person,
+        name = "apple",
+        selfDescription = "이석준이랑 형제지?",
+    ),
 )
 
 @Composable
