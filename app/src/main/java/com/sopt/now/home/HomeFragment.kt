@@ -50,7 +50,7 @@ class HomeFragment: Fragment() {
         Log.d("home", "$items")
 
         // RecyclerView 설정
-        binding.rvMyprofile.run {
+        with(binding.rvMyprofile) {
             layoutManager = LinearLayoutManager(context)
             adapter = multiTypeAdapter
         }
