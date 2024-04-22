@@ -20,9 +20,7 @@ class LoginViewModel : ViewModel(){
             _userInfo.value = true
     }
 
-    fun getUserInfo(): UserData {
-        return MyApplication.prefs.getUserData(PREF_KEY)
-    }
+    fun getUserInfo(): UserData = MyApplication.prefs.getUserData(PREF_KEY)
 
     fun loginValid(id: String, pw: String, userData: UserData): Boolean {
         when {
