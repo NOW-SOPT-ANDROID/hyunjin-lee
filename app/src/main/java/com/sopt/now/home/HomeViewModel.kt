@@ -1,95 +1,46 @@
 package com.sopt.now.home
 
-import androidx.lifecycle.ViewModel
-import com.sopt.now.R
+import android.app.Application
+import android.util.Log
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.sopt.now.data.AppDatabase
 import com.sopt.now.data.Friend
+import com.sopt.now.data.FriendDao
+import kotlinx.coroutines.launch
 
-class HomeViewModel : ViewModel() {
-    val mockFriendList = listOf<Friend>(
-        Friend(
-            profileImage = R.drawable.ic_person_black_24,
-            name = "이의경",
-            selfDescription = "의진아 고생이 많다,, ^_^",
-        ),
-        Friend(
-            profileImage = R.drawable.ic_person_black_24,
-            name = "우상욱",
-            selfDescription = "손흥민",
-        ),
-        Friend(
-            profileImage = R.drawable.ic_person_black_24,
-            name = "배지현",
-            selfDescription = "모루인형 만들어줄게 좀만 기다려",
-        ),
-        Friend(
-            profileImage = R.drawable.ic_person_black_24,
-            name = "강문수",
-            selfDescription = "오빠 얼른 와서 신랄한 비판 ㄱㄱ",
-        ),
-        Friend(
-            profileImage = R.drawable.ic_person_black_24,
-            name = "이유빈",
-            selfDescription = "유빈아 보고싶어",
-        ),
-        Friend(
-            profileImage = R.drawable.ic_person_black_24,
-            name = "이나경",
-            selfDescription = "나경아 엔씨가 이길 거 같아?",
-        ),
-        Friend(
-            profileImage = R.drawable.ic_person_black_24,
-            name = "김언지",
-            selfDescription = "언지야 사랑해",
-        ),
-        Friend(
-            profileImage = R.drawable.ic_person_black_24,
-            name = "손민재",
-            selfDescription = "큐브 좀 그만해라",
-        ),
-        Friend(
-            profileImage = R.drawable.ic_person_black_24,
-            name = "이석준",
-            selfDescription = "이석찬이랑 형제지?",
-        ),
-        Friend(
-            profileImage = R.drawable.ic_person_black_24,
-            name = "이석찬",
-            selfDescription = "이석준이랑 형제지?",
-        ),
-        Friend(
-            profileImage = R.drawable.ic_person_black_24,
-            name = "신민석",
-            selfDescription = "운팀 회식 안빠질 거지?",
-        ),
-        Friend(
-            profileImage = R.drawable.ic_person_black_24,
-            name = "이석준",
-            selfDescription = "이석찬이랑 형제지?",
-        ),
-        Friend(
-            profileImage = R.drawable.ic_person_black_24,
-            name = "이석찬",
-            selfDescription = "이석준이랑 형제지?",
-        ),
-        Friend(
-            profileImage = R.drawable.ic_person_black_24,
-            name = "신민석",
-            selfDescription = "운팀 회식 안빠질 거지?",
-        ),
-        Friend(
-            profileImage = R.drawable.ic_person_black_24,
-            name = "이석준",
-            selfDescription = "이석찬이랑 형제지?",
-        ),
-        Friend(
-            profileImage = R.drawable.ic_person_black_24,
-            name = "이석찬",
-            selfDescription = "이석준이랑 형제지?",
-        ),
-        Friend(
-            profileImage = R.drawable.ic_person_black_24,
-            name = "신민석",
-            selfDescription = "운팀 회식 안빠질 거지?",
-        ),
-    )
+class HomeViewModel(application: Application) : AndroidViewModel(application) {
+    private val friendDao: FriendDao = AppDatabase.getDatabase(application).friendDao()
+    private val _mockFriendList = MutableLiveData<List<Friend>>()
+    val mockFriendList: LiveData<List<Friend>> = _mockFriendList
+
+    init {
+        loadFriends()
+    }
+
+    // 친구 list load
+    private fun loadFriends() {
+        viewModelScope.launch {
+            _mockFriendList.value = friendDao.getAllFriendsList()
+        }
+    }
+
+     // 친구 추가
+    fun addFriend(newFriend: Friend) {
+        Log.d("add", "${newFriend}")
+        viewModelScope.launch {
+            friendDao.insertFriend(newFriend)
+            loadFriends()
+        }
+    }
+
+    // 친구 삭제
+    fun removeFriend(friend: Friend) {
+        viewModelScope.launch {
+            friendDao.deleteFriend(friend)
+            loadFriends()
+        }
+    }
 }
