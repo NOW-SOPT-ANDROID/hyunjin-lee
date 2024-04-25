@@ -54,6 +54,9 @@ dependencies {
     implementation "androidx.activity:activity-ktx:1.9.0"
     implementation 'com.google.code.gson:gson:2.10.1'
 
+    // 코루틴을 위한 Kotlin
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1'
+
     // RoomDB
     implementation "androidx.room:room-runtime:2.6.1"
     implementation "androidx.room:room-ktx:2.6.1"
