@@ -5,10 +5,11 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "friend_list")
 data class Friend(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @DrawableRes @ColumnInfo(name = "profile_image") val profileImage: Int,
-    @ColumnInfo(name = "name") val name: String,
-    @ColumnInfo(name = "self_description") val selfDescription: String,
-)
+    @ColumnInfo(name = "friend_name") val name: String,
+    @ColumnInfo(name = "friend_music") val music: String,
+){
+    @PrimaryKey(autoGenerate = true) var friend_id: Int = 0
+}
