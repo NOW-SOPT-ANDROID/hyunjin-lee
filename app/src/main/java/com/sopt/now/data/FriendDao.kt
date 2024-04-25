@@ -9,11 +9,11 @@ import androidx.room.Query
 
 @Dao
 interface FriendDao {
-    @Query("SELECT * FROM friend")
+    @Query("SELECT * FROM friend_list")
     fun getAllFriends(): LiveData<List<Friend>>
 
     // suspend 함수로 변경
-    @Query("SELECT * FROM friend")
+    @Query("SELECT * FROM friend_list")
     suspend fun getAllFriendsList(): List<Friend>
 
     // 친구 정보 DB 삽입
