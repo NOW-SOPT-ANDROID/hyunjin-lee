@@ -1,30 +1,18 @@
 package com.sopt.now.main
 
+import android.app.Application
+import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.google.gson.Gson
-import com.sopt.now.MyApplication
+import com.sopt.now.data.UserDao
 import com.sopt.now.data.UserData
+import com.sopt.now.data.UserDatabase
 
-class MainViewModel : ViewModel() {
-    private val _userInfo = MutableLiveData<UserData>()
-    val userInfo: LiveData<UserData> = _userInfo
-
-    init {
-        loadUserInfo()
-    }
+class MainViewModel(application: Application) : AndroidViewModel(application) {
+    private val userDao: UserDao = UserDatabase.getUserDatabase(application).userDao()
+    val userInfo: LiveData<UserData> = userDao.getAllUserInfo()
 
     fun loadUserInfo() {
-        val userData = MyApplication.prefs.getUserData(PREF_KEY)
-        _userInfo.value = userData
-    }
-
-    fun getUserInfo(): UserData {
-        return MyApplication.prefs.getUserData(PREF_KEY)
-    }
-
-    companion object {
-        private const val PREF_KEY = "userData"
+        Log.d("user","${userDao.getAllUserInfo()}")
     }
 }

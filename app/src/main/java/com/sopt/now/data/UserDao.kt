@@ -30,4 +30,7 @@ interface UserDao {
 
     @Query("SELECT * FROM user_data WHERE user_id = :userId")
     suspend fun getUserById(userId: String): UserData?
+
+    @Query("SELECT * FROM user_data")
+    fun getAllUserListInfo(): LiveData<List<UserData>>
 }

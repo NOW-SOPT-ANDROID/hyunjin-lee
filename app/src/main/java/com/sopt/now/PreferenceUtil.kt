@@ -14,23 +14,12 @@ class PreferenceUtil(context: Context) {
         return Gson().fromJson(userJson, UserData::class.java) ?: UserData("", "", "", "", 0)
     }
 
-    fun setString(key: String, str: String) {
-        prefs.edit().putString(key, str).apply()
-    }
-
-    fun getBoolean(key: String): Boolean {
-        return prefs.getBoolean(key, false)
-    }
-
-    fun setBoolean(key: String, value: Boolean) {
-        prefs.edit().putBoolean(key, value).apply()
-    }
-
     fun clearUserData() {
         prefs.edit().clear().apply()
     }
 
     companion object {
         const val PREFS_NAME = "prefs_name"
+        const val PREF_KEY = "user_data" // 사용자 데이터를 저장할 때 사용할 키 값
     }
 }
