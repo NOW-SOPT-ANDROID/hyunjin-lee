@@ -25,17 +25,27 @@ class SignUpActivity : AppCompatActivity()  {
     private fun clicksignUpButton() {
         binding.btSignupButton.setOnClickListener {
             val user = getUserInfo()
+            // 유효성 검사 후 회원가입 진행
+            setSignupResult(user)
+        }
+    }
+
+    private fun setSignupResult(user: UserData) {
+        val validateSignUpData = viewModel.validateSignUp(user)
+        if(validateSignUpData == null){
             viewModel.signUp(user).observe(this) { isSuccessful ->
                 if (isSuccessful) {
                     // 회원가입 성공, 로그인 액티비티로 데이터 전달
-                    Toast.makeText(this, "회원가입 성공.", Toast.LENGTH_SHORT).show()
+                    Snackbar.make(binding.root, "회원가입 성공", Snackbar.LENGTH_SHORT).show()
                     saveSignUpInfo(user.userid, user.userpw) // 사용자 정보 저장
                     startLoginActivity()
                 } else {
                     // 회원가입 실패, 사용자에게 메시지 표시
-                    Toast.makeText(this, "이미 존재하는 아이디입니다.", Toast.LENGTH_SHORT).show()
+                    Snackbar.make(binding.root, "이미 존재하는 아이디입니다.", Snackbar.LENGTH_SHORT).show()
                 }
             }
+        } else{
+            Snackbar.make(binding.root, this.getString(validateSignUpData), Snackbar.LENGTH_SHORT).show()
         }
     }
 
@@ -43,18 +53,6 @@ class SignUpActivity : AppCompatActivity()  {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish()
-    }
-
-    private fun setSignupResult(user: UserData) {
-        val validateSignUpData = viewModel.validateSignUp(user)
-        if(validateSignUpData == null){
-            Snackbar.make(binding.root, "회원가입 성공", Snackbar.LENGTH_SHORT).show()
-            viewModel.signUp(user)
-            saveSignUpInfo(user.userid, user.userpw) // 사용자 정보 저장
-            finish()
-        } else{
-            Snackbar.make(binding.root, this.getString(validateSignUpData), Snackbar.LENGTH_SHORT).show()
-        }
     }
 
     // userinfo 입력

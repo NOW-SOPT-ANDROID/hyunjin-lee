@@ -22,8 +22,7 @@ class SignUpViewModel(application: Application) : AndroidViewModel(application) 
     // 회원가입 함수
     fun signUp(user: UserData): LiveData<Boolean> {
         val result = MutableLiveData<Boolean>()
-        // Coroutine을 사용하여 비동기 처리
-        viewModelScope.launch {
+        viewModelScope.launch { // Coroutine을 사용하여 비동기 처리
             val insertResult = userRepository.insert(user)
             result.postValue(insertResult != -1L)
         }
