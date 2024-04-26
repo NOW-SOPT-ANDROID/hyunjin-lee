@@ -13,29 +13,22 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
     private val userDao = UserDatabase.getUserDatabase(application).userDao()
-    private val userRepository: UserRepository
-    private val _userInfo = MutableLiveData<UserData?>()
-    val userInfo: LiveData<UserData?> = _userInfo
-    val allUserInfo: LiveData<List<UserData>> = userDao.getAllUserListInfo()
+    private val userRepository: UserRepository = UserRepository(userDao)
+    private val _loginResult = MutableLiveData<Boolean>()
+    val loginResult: LiveData<Boolean> = _loginResult
 
-    fun logAllUserInfo() {
-        allUserInfo.observeForever { userList ->
-            userList.forEach { userData ->
-                Log.d("AllUserInfo", "ID: ${userData.userid}, PW: ${userData.userpw}, Name: ${userData.username}, MBTI: ${userData.usermbti}, Image ID: ${userData.userprofileImage}")
-            }
-        }
-    }
-    init {
-        userRepository = UserRepository(userDao)
-    }
-
-    fun getUserInfo(id: String) {
+    fun login(id: String, pw: String) {
         viewModelScope.launch {
             try {
                 val userInfo = userRepository.getUserInfo(id)
-                _userInfo.postValue(userInfo) // 백그라운드 스레드에서 안전하게 LiveData 업데이트
+                if (userInfo != null && userInfo.userpw == pw) {
+                    _loginResult.postValue(true)
+                } else {
+                    _loginResult.postValue(false)
+                }
             } catch (e: Exception) {
-                Log.e("LoginViewModel", "Failed to fetch user info", e)
+                Log.e("LoginViewModel", "로그인 실패 ㅠㅠ..", e)
+                _loginResult.postValue(false)
             }
         }
     }

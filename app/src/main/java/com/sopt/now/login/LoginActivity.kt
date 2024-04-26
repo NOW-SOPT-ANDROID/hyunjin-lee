@@ -3,6 +3,7 @@ package com.sopt.now.login
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
@@ -19,21 +20,9 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setUserData()
-
-        // 여기에 추가
-        viewModel.logAllUserInfo()
-
-        // 로그인 버튼 클릭 시
-        binding.btLoginButton.setOnClickListener {
-            handleLoginClick()
-        }
-
-        // 회원가입 버튼 클릭 시
-        binding.tvLoginSignupButton.setOnClickListener {
-            handleSignupClick()
-
-        }
+        setUserData() // user data 세팅
+        handleLoginClick() // 로그인 버튼 클릭 시
+        handleSignupClick() // 회원가입 버튼 클릭 시
     }
 
     private fun setUserData() {
@@ -41,40 +30,49 @@ class LoginActivity : AppCompatActivity() {
         val userData = preferenceUtil.getUserData(PreferenceUtil.PREF_KEY) // PREF_KEY는 사용자 데이터를 저장할 때 사용한 키 값
         binding.etLoginId.setText(userData.userid)
         binding.etLoginPw.setText(userData.userpw)
+
+        // 회원가입 때 입력한 ID와 PW를 받아와서 EditText에 설정
+        intent.getStringExtra("userId")?.let {
+            binding.etLoginId.setText(it)
+        }
+        intent.getStringExtra("userPw")?.let {
+            binding.etLoginPw.setText(it)
+        }
     }
 
-
-    private fun handleLoginClick() {
-        val(inputId, inputPw) = Pair(
-            binding.etLoginId.text.toString(),
-            binding.etLoginPw.text.toString()
-        )
-
-        // LiveData 관찰
-        viewModel.userInfo.observe(this) { userData ->
-            if (userData != null && inputId == userData.userid && inputPw == userData.userpw) {
+    private fun observeLoginResult() {
+        viewModel.loginResult.observe(this) { isSuccess ->
+            if (isSuccess) {
                 Snackbar.make(binding.root, "로그인 성공!", Snackbar.LENGTH_SHORT).show()
                 navigateToMain()
             } else {
-                Snackbar.make(binding.root, "로그인 실패. 아이디 혹은 비밀번호를 확인해주세요.", Snackbar.LENGTH_SHORT)
-                    .show()
+                Snackbar.make(binding.root, "로그인 실패. 아이디 혹은 비밀번호를 확인해주세요.", Snackbar.LENGTH_SHORT).show()
             }
         }
+    }
 
-        viewModel.getUserInfo(inputId)
+    private fun handleLoginClick() {
+        binding.btLoginButton.setOnClickListener {
+            val(inputId, inputPw) = Pair(
+                binding.etLoginId.text.toString(),
+                binding.etLoginPw.text.toString()
+            )
+            viewModel.login(inputId, inputPw)
+            observeLoginResult()
+        }
     }
 
     private fun handleSignupClick() {
-        val signUpIntent = Intent(this@LoginActivity, SignUpActivity::class.java)
-        startActivityForResult(signUpIntent, SIGN_UP_REQUEST_CODE)
-    }
+        binding.tvLoginSignupButton.setOnClickListener {
+            val signUpIntent = Intent(this@LoginActivity, SignUpActivity::class.java)
+            signUpActivityResult.launch(signUpIntent) // 변경된 부분
+        }
+     }
 
-    // LoginActivity 내에 onActivityResult() 추가
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == SIGN_UP_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            data?.let {
+    // registerForActivityResult API 사용
+    private val signUpActivityResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            result.data?.let {
                 val userId = it.getStringExtra("userId")
                 val userPw = it.getStringExtra("userPw")
                 binding.etLoginId.setText(userId)
@@ -88,9 +86,5 @@ class LoginActivity : AppCompatActivity() {
             startActivity(it)
         }
         finish()
-    }
-
-    companion object {
-        const val SIGN_UP_REQUEST_CODE = 1 // 회원가입 요청 코드 정의
     }
 }

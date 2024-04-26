@@ -50,7 +50,13 @@ class SignUpActivity : AppCompatActivity()  {
     }
 
     private fun startLoginActivity() {
+        val(userId, userPw) = Pair(
+            binding.etSignupId.text.toString(),
+            binding.etSignupPw.text.toString()
+        )
         val intent = Intent(this, LoginActivity::class.java)
+        intent.putExtra("userId", userId)
+        intent.putExtra("userPw", userPw)
         startActivity(intent)
         finish()
     }
