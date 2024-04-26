@@ -14,7 +14,7 @@ class FriendViewHolder(private val binding: ItemFriendBinding, private val onFri
         binding.run {
             ivProfile.setImageResource(friend.profileImage)
             tvName.text = friend.name
-            tvSelfDescription.text = friend.selfDescription
+            tvSelfDescription.text = friend.music
         }
 
         itemView.setOnLongClickListener {

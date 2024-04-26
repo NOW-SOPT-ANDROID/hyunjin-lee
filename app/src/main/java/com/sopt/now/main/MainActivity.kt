@@ -13,7 +13,9 @@ import com.sopt.now.search.SearchFragment
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel by viewModels<MainViewModel> {
+        UserViewModelFactory(application)
+    }
     private var backPressedTime: Long = 0
     private var lastSelectedItemId = R.id.menu_home // 초기 선택된 탭 지정
 
@@ -21,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        // 유저 정보 로드
         viewModel.loadUserInfo()
 
         replaceFragment(HomeFragment())

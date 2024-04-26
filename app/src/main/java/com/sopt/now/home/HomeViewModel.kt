@@ -6,13 +6,13 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.sopt.now.data.AppDatabase
 import com.sopt.now.data.Friend
 import com.sopt.now.data.FriendDao
+import com.sopt.now.data.FriendDatabase
 import kotlinx.coroutines.launch
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
-    private val friendDao: FriendDao = AppDatabase.getDatabase(application).friendDao()
+    private val friendDao: FriendDao = FriendDatabase.getDatabase(application).friendDao()
     private val _mockFriendList = MutableLiveData<List<Friend>>()
     val mockFriendList: LiveData<List<Friend>> = _mockFriendList
 

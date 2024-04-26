@@ -49,7 +49,7 @@ class MultiTypeAdapter(private val context: Context, private val onFriendLongCli
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Any>() {
             override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean {
                 return when {
-                    oldItem is Friend && newItem is Friend -> oldItem.id == newItem.id
+                    oldItem is Friend && newItem is Friend -> oldItem.friend_id == newItem.friend_id
                     oldItem is UserData && newItem is UserData -> oldItem.id == newItem.id
                     else -> false
                 }

@@ -39,12 +39,16 @@ class MyPageFragment : Fragment(){
     }
 
     private fun updateUI() {
-        val userData = viewModel.getUserInfo()
-        with(binding) {
-            tvMainIdContent.text = userData.id
-            tvMainPwContent.text = userData.pw
-            tvMainMbtiContent.text = userData.mbti
-            tvMainName.text = userData.name
+        viewModel.userInfo.observe(viewLifecycleOwner) { userData ->
+            userData?.let {
+                // UI 업데이트
+                with(binding) {
+                    tvMainIdContent.text = it.userid
+                    tvMainPwContent.text = it.userpw
+                    tvMainMbtiContent.text = it.usermbti
+                    tvMainName.text = it.username
+                }
+            }
         }
     }
 

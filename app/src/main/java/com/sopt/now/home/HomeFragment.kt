@@ -47,7 +47,10 @@ class HomeFragment: Fragment() {
     private fun observeViewModel() {
         // User 정보에 대한 관찰
         mainViewModel.userInfo.observe(viewLifecycleOwner) { userData ->
-            setupRecyclerView(userData)
+            // userData가 null이 아닐 때만 setupRecyclerView 호출
+            userData?.let {
+                setupRecyclerView(it)
+            }
         }
 
         // 친구 목록에 대한 관찰
@@ -112,7 +115,7 @@ class HomeFragment: Fragment() {
                                 Friend(
                                     profileImage = R.drawable.ic_person_black_24,
                                     name = userName.toString(),
-                                    selfDescription = profilemusic.toString()
+                                    music = profilemusic.toString()
                                 )
                             )
                         }
