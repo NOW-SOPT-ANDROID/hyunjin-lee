@@ -2,10 +2,11 @@ package com.sopt.now
 
 import android.app.Application
 import androidx.room.Room
-import com.sopt.now.data.FriendDatabase
-import com.sopt.now.data.FriendDatabase.Companion.MIGRATION_1_2_
-import com.sopt.now.data.UserDatabase
-import com.sopt.now.data.UserDatabase.Companion.MIGRATION_1_2
+import com.sopt.now.data.Friend.FriendDatabase
+import com.sopt.now.data.Friend.FriendDatabase.Companion.MIGRATION_1_2_
+import com.sopt.now.data.PreferenceUtil
+import com.sopt.now.data.User.UserDatabase
+import com.sopt.now.data.User.UserDatabase.Companion.MIGRATION_1_2
 class MyApplication : Application() {
     override fun onCreate() {
         prefs = PreferenceUtil(applicationContext)
