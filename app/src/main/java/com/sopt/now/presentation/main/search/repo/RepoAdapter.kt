@@ -9,7 +9,7 @@ import com.sopt.now.R
 class RepoAdapter(private val repoList: MutableList<Repo> = mutableListOf()) : RecyclerView.Adapter<RepoViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_reop_list, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_repo_list, parent, false)
         return RepoViewHolder(itemView)
     }
 
