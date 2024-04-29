@@ -12,7 +12,7 @@
         android:layout_marginStart="20dp"
         android:scaleType="centerCrop"
         android:layout_marginVertical="10dp"
-        android:src="@drawable/ic_person_black_24"
+        android:src="@drawable/ic_plus_white_24"
         app:layout_constraintDimensionRatio="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

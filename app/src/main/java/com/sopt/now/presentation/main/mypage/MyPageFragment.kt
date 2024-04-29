@@ -27,42 +27,42 @@ class MyPageFragment : Fragment(){
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        updateUI() // 사용자 데이터 변경 시 UI 업데이트
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//        updateUI() // 사용자 데이터 변경 시 UI 업데이트
+//
+//        binding.btMypageLogoutButton.setOnClickListener{
+//            Log.d("logout" ,"$...")
+//            MyApplication.prefs.clearUserData()
+//            navigateToLogin()
+//        }
+//    }
 
-        binding.btMypageLogoutButton.setOnClickListener{
-            Log.d("logout" ,"$...")
-            MyApplication.prefs.clearUserData()
-            navigateToLogin()
-        }
-    }
-
-    private fun updateUI() {
-        viewModel.userInfo.observe(viewLifecycleOwner) { userData ->
-            userData?.let {
-                // UI 업데이트
-                with(binding) {
-                    tvMainIdContent.text = it.userid
-                    tvMainPwContent.text = it.userpw
-                    tvMainMbtiContent.text = it.usermbti
-                    tvMainName.text = it.username
-                }
-            }
-        }
-    }
-
-    // 로그인 화면으로 이동하는 메서드
-    private fun navigateToLogin() {
-        val intent = Intent(activity, LoginActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        }
-        startActivity(intent)
-        activity?.finish() // 현재 액티비티 종료
-    }
-
-    override fun onDestroyView() {
-        _binding = null // 메모리 누수 방지를 위해 뷰 바인딩 참조 해제
-        super.onDestroyView()
-    }
+//    private fun updateUI() {
+//        viewModel.userInfo.observe(viewLifecycleOwner) { userData ->
+//            userData?.let {
+//                // UI 업데이트
+//                with(binding) {
+//                    tvMainIdContent.text = it.userid
+//                    tvMainPwContent.text = it.userpw
+//                    tvMainMbtiContent.text = it.usermbti
+//                    tvMainName.text = it.username
+//                }
+//            }
+//        }
+//    }
+//
+//    // 로그인 화면으로 이동하는 메서드
+//    private fun navigateToLogin() {
+//        val intent = Intent(activity, LoginActivity::class.java).apply {
+//            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//        }
+//        startActivity(intent)
+//        activity?.finish() // 현재 액티비티 종료
+//    }
+//
+//    override fun onDestroyView() {
+//        _binding = null // 메모리 누수 방지를 위해 뷰 바인딩 참조 해제
+//        super.onDestroyView()
+//    }
 }

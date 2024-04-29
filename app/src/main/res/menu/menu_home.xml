@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/menu"
-    >
-
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Home -->
     <item
         android:id="@+id/menu_home"
@@ -14,7 +10,8 @@
     <item
         android:id="@+id/menu_search"
         android:icon="@drawable/ic_home_white_24"
-        android:title="탐색" />
+        android:title="검색" />
+
 
     <!-- MyPage -->
     <item
