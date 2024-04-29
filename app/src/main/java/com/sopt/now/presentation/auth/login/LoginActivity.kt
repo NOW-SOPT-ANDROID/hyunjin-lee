@@ -1,13 +1,11 @@
 package com.sopt.now.presentation.auth.login
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.result.contract.ActivityResultContracts
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.snackbar.Snackbar
-import com.sopt.now.data.PreferenceUtil
+import com.sopt.now.data.auth.LoginData.RequestLoginDto
 import com.sopt.now.presentation.auth.signup.SignUpActivity
 import com.sopt.now.databinding.ActivityLoginBinding
 import com.sopt.now.presentation.main.MainActivity
@@ -19,64 +17,56 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
+        initViews()
+        initObserver()
         setUserData() // user data 세팅
-        handleLoginClick() // 로그인 버튼 클릭 시
-        handleSignupClick() // 회원가입 버튼 클릭 시
     }
 
-    private fun setUserData() {
-        val preferenceUtil = PreferenceUtil(applicationContext)
-        val userData = preferenceUtil.getUserData(PreferenceUtil.PREF_KEY) // PREF_KEY는 사용자 데이터를 저장할 때 사용한 키 값
-        binding.etLoginId.setText(userData.userid)
-        binding.etLoginPw.setText(userData.userpw)
-
-        // 회원가입 때 입력한 ID와 PW를 받아와서 EditText에 설정
-        intent.getStringExtra("userId")?.let {
-            binding.etLoginId.setText(it)
+    private fun initViews() {
+        // 로그인 버튼 클릭시
+        binding.btLoginButton.setOnClickListener {
+            viewModel.login(getLoginRequestDto())
         }
-        intent.getStringExtra("userPw")?.let {
-            binding.etLoginPw.setText(it)
-        }
-    }
 
-    private fun observeLoginResult() {
-        viewModel.loginResult.observe(this) { isSuccess ->
-            if (isSuccess) {
-                Snackbar.make(binding.root, "로그인 성공!", Snackbar.LENGTH_SHORT).show()
-                navigateToMain()
-            } else {
-                Snackbar.make(binding.root, "로그인 실패. 아이디 혹은 비밀번호를 확인해주세요.", Snackbar.LENGTH_SHORT).show()
+        // 회원가입 버튼 클릭시
+        binding.tvLoginSignupButton.setOnClickListener {
+            Intent(this@LoginActivity, SignUpActivity::class.java).let {
+                startActivity(it)
             }
         }
     }
 
-    private fun handleLoginClick() {
-        binding.btLoginButton.setOnClickListener {
-            val(inputId, inputPw) = Pair(
-                binding.etLoginId.text.toString(),
-                binding.etLoginPw.text.toString()
-            )
-            viewModel.login(inputId, inputPw)
-            observeLoginResult()
+    private fun initObserver() {
+        viewModel.login_liveData.observe(this) { loginState ->
+            Toast.makeText(
+                this@LoginActivity,
+                loginState.message,
+                Toast.LENGTH_SHORT,
+            ).show()
+        }
+        viewModel.login_liveData.observe(this) { loginState ->
+            if (loginState.isSuccess) {
+                navigateToMain()
+            }
         }
     }
 
-    private fun handleSignupClick() {
-        binding.tvLoginSignupButton.setOnClickListener {
-            val signUpIntent = Intent(this@LoginActivity, SignUpActivity::class.java)
-            signUpActivityResult.launch(signUpIntent) // 변경된 부분
-        }
-     }
+    private fun setUserData() {
+        val memberId = intent.getStringExtra("userId")?.toIntOrNull() ?: 0
+        viewModel.getUserInfo(memberId)
+        observeLoginState()
+    }
 
-    // registerForActivityResult API 사용
-    private val signUpActivityResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            result.data?.let {
-                val userId = it.getStringExtra("userId")
-                val userPw = it.getStringExtra("userPw")
-                binding.etLoginId.setText(userId)
-                binding.etLoginPw.setText(userPw)
+    // loginState에서 authenticationId를 받아와서 EditText에 설정
+    private fun observeLoginState() {
+        viewModel.user_liveData.observe(this) { userState ->
+            if (userState.isSuccess) {
+                binding.etLoginId.setText(userState.memberId)
+                // 회원 조회 성공 메시지 표시
+                Toast.makeText(this, userState.message, Toast.LENGTH_SHORT).show()
+            } else {
+                // 실패 메시지 표시
+                Toast.makeText(this, userState.message, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -86,5 +76,14 @@ class LoginActivity : AppCompatActivity() {
             startActivity(it)
         }
         finish()
+    }
+
+    private fun getLoginRequestDto(): RequestLoginDto {
+        val id = binding.etLoginId.text.toString()
+        val password = binding.etLoginPw.text.toString()
+        return RequestLoginDto(
+            authenticationId = id,
+            password = password,
+        )
     }
 }
