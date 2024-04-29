@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingHorizontal="50dp"
-    tools:context=".signup.SignUpActivity">
+    tools:context=".presentation.auth.signup.SignUpActivity">
 
     <TextView
         android:id="@+id/tv_signup_title"
