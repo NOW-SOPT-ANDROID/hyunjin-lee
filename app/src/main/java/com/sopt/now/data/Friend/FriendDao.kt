@@ -6,7 +6,6 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.sopt.now.data.Friend.Friend
 
 @Dao
 interface FriendDao {
