@@ -1,4 +1,4 @@
-package com.sopt.now.compose.ui.Item
+package com.sopt.now.compose.ui.HomeScreen.Item
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
@@ -19,18 +19,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sopt.now.compose.R
-import com.sopt.now.compose.data.MyProfile
+import com.sopt.now.compose.data.UserProfile
 
-val myprofileList = listOf<MyProfile>(
-    MyProfile(
-        profileImage = Icons.Filled.Person,
-        name = "이현진",
-        music = "daisy - wave to earth",
-    )
+val myprofile = UserProfile.MyProfile(
+    profileImage = Icons.Filled.Person,
+    name = "이현진",
+    music = "daisy - wave to earth",
 )
 
 @Composable
-fun MyProfileItem(me: MyProfile) {
+fun MyProfileItem(me: UserProfile.MyProfile) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
