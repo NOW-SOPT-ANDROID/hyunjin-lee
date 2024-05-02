@@ -1,7 +1,7 @@
-package com.sopt.now.presentation.auth
+package com.sopt.now.data.auth.User
 
 data class UserState(
     val isSuccess: Boolean,
     val message: String,
-    val memberId: String? = null
+    val userId: String? = null
 )

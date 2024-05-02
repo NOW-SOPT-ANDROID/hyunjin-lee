@@ -61,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
     private fun observeLoginState() {
         viewModel.user_liveData.observe(this) { userState ->
             if (userState.isSuccess) {
-                binding.etLoginId.setText(userState.memberId)
+                binding.etLoginId.setText(userState.userId)
                 // 회원 조회 성공 메시지 표시
                 Toast.makeText(this, userState.message, Toast.LENGTH_SHORT).show()
             } else {
@@ -72,10 +72,13 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun navigateToMain() {
-        Intent(this, MainActivity::class.java).let {
-            startActivity(it)
+        viewModel.login_liveData.value?.memberId?.let { memberId ->
+            val intent = Intent(this@LoginActivity, MainActivity::class.java).apply {
+                putExtra("memberId", memberId)
+            }
+            startActivity(intent)
+            finish()
         }
-        finish()
     }
 
     private fun getLoginRequestDto(): RequestLoginDto {

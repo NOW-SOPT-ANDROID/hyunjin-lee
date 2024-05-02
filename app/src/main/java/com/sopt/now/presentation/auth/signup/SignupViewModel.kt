@@ -1,13 +1,13 @@
 package com.sopt.now.presentation.auth.signup
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.sopt.now.data.auth.SignUpData.RequestSignUpDto
 import com.sopt.now.data.auth.SignUpData.ResponseSignUpDto
 import com.sopt.now.data.auth.ServicePool
+import com.sopt.now.data.auth.SignUpData.SignUpState
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

@@ -5,11 +5,12 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
+import com.sopt.now.data.auth.LoginData.LoginState
 import com.sopt.now.data.auth.LoginData.RequestLoginDto
 import com.sopt.now.data.auth.LoginData.ResponseLoginDto
 import com.sopt.now.data.auth.ServicePool
 import com.sopt.now.data.auth.User.ResponseUserDto
-import com.sopt.now.presentation.auth.UserState
+import com.sopt.now.data.auth.User.UserState
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,7 +35,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
                     user_liveData.value = UserState(
                         isSuccess = true,
                         message = "회원 조회 성공: ${data?.message}",
-                        memberId = authenticationId
+                        userId = authenticationId
                     )
                 } else {
                     // 오류 응답 처리

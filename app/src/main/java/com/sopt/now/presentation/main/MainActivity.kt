@@ -24,12 +24,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        // 유저 정보 로드
-        viewModel.loadUserInfo()
+        // userId를 Intent에서 가져옴
+        val memberId = intent.getStringExtra("memberId")
 
         replaceFragment(HomeFragment())
         // 바텀 네비게이션 클릭 이벤트 처리 함수 호출
-        setBottomNavigation()
+        setBottomNavigation(memberId)
     }
 
     // 뒤로가기 두 번 누르면 종료
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         backPressedTime = System.currentTimeMillis()
     }
 
-    private fun setBottomNavigation() {
+    private fun setBottomNavigation(memberId: String?) {
         // 바텀 네비게이션 아이템 선택 리스너 설정
         binding.bnvHome.setOnItemSelectedListener{ it ->
             if (it.itemId == lastSelectedItemId) {
@@ -62,7 +62,12 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     R.id.menu_mypage -> { // my page 선택
-                        replaceFragment(MyPageFragment())
+                        val myPageFragment = MyPageFragment().apply {
+                            arguments = Bundle().apply {
+                                putString("memberId", memberId) // userId를 MyPageFragment에 전달
+                            }
+                        }
+                        replaceFragment(myPageFragment)
                     }
 
                     else -> false
