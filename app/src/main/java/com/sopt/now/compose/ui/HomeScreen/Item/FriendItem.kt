@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.sopt.now.compose.data.UserProfile
+import com.sopt.now.compose.data.auth.User.UserProfile
 
 val friendList = listOf<UserProfile.Friend>(
     UserProfile.Friend(
