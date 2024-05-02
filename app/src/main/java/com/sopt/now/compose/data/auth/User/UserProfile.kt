@@ -1,4 +1,4 @@
-package com.sopt.now.compose.data
+package com.sopt.now.compose.data.auth.User
 
 import androidx.compose.ui.graphics.vector.ImageVector
 

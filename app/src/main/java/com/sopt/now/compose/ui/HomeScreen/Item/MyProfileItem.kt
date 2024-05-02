@@ -19,7 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sopt.now.compose.R
-import com.sopt.now.compose.data.UserProfile
+import com.sopt.now.compose.data.auth.User.UserProfile
 
 val myprofile = UserProfile.MyProfile(
     profileImage = Icons.Filled.Person,
