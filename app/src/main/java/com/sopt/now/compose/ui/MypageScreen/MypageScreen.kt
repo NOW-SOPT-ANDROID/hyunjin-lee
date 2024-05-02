@@ -1,5 +1,7 @@
 package com.sopt.now.compose.ui.MypageScreen
 
+import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -12,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -47,13 +50,22 @@ fun MypageScreen(
     var userName by rememberSaveable { mutableStateOf("") }
     var userPhone by rememberSaveable { mutableStateOf("") }
 
-    if (myPageState.isSuccess) {
-        Toast.makeText(context, myPageState.message, Toast.LENGTH_SHORT).show()
-        userId = myPageState.userId ?: ""
-        userName = myPageState.userName ?: ""
-        userPhone = myPageState.userPhone ?: ""
-    } else if (myPageState.message.isNotEmpty()) {
-        Toast.makeText(context, myPageState.message, Toast.LENGTH_SHORT).show()
+    // 회원 정보 조회
+    val memberId = getMemberIdFromPreferences(context).toString()
+    Log.d("loginscreen", memberId)
+    LaunchedEffect(memberId) {
+        myPageViewModel.getUserInfo(memberId)
+    }
+
+    LaunchedEffect(myPageState) {
+        if (myPageState.isSuccess) {
+            Toast.makeText(context, myPageState.message, Toast.LENGTH_SHORT).show()
+            userId = myPageState.userId ?: ""
+            userName = myPageState.userName ?: ""
+            userPhone = myPageState.userPhone ?: ""
+        } else if (myPageState.message.isNotEmpty()) {
+            Toast.makeText(context, myPageState.message, Toast.LENGTH_SHORT).show()
+        }
     }
 
     Column(
@@ -89,25 +101,8 @@ fun MypageScreen(
             modifier = modifier.fillMaxWidth(),
             textAlign = TextAlign.Left
         )
-
         Text(
             text = userId,
-            fontSize = 20.sp,
-            modifier = modifier.fillMaxWidth(),
-            textAlign = TextAlign.Left
-        )
-        Spacer(modifier = modifier.height(30.dp))
-
-        // pw
-        Text(
-            text = stringResource(id = R.string.PW),
-            fontSize = 20.sp,
-            modifier = modifier.fillMaxWidth(),
-            textAlign = TextAlign.Left
-        )
-
-        Text(
-            text = userName,
             fontSize = 20.sp,
             modifier = modifier.fillMaxWidth(),
             textAlign = TextAlign.Left
@@ -121,7 +116,21 @@ fun MypageScreen(
             modifier = modifier.fillMaxWidth(),
             textAlign = TextAlign.Left
         )
+        Text(
+            text = userName,
+            fontSize = 20.sp,
+            modifier = modifier.fillMaxWidth(),
+            textAlign = TextAlign.Left
+        )
+        Spacer(modifier = modifier.height(30.dp))
 
+        // phone
+        Text(
+            text = stringResource(id = R.string.PHONE),
+            fontSize = 20.sp,
+            modifier = modifier.fillMaxWidth(),
+            textAlign = TextAlign.Left
+        )
         Text(
             text = userPhone,
             fontSize = 20.sp,
@@ -129,15 +138,6 @@ fun MypageScreen(
             textAlign = TextAlign.Left
         )
         Spacer(modifier = modifier.height(30.dp))
-
-        // mbti
-        Text(
-            text = stringResource(id = R.string.PHONE),
-            fontSize = 20.sp,
-            modifier = modifier.fillMaxWidth(),
-            textAlign = TextAlign.Left
-        )
-        Spacer(modifier = Modifier.height(15.dp))
 
         // 로그아웃 버튼
         AppButton(
@@ -150,4 +150,9 @@ fun MypageScreen(
             padding = PaddingValues(vertical = 10.dp)
         )
     }
+}
+
+fun getMemberIdFromPreferences(context: Context): String? {
+    val sharedPref = context.getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE)
+    return sharedPref.getString("memberId", null)
 }

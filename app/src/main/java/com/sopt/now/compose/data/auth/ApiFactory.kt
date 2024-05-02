@@ -15,7 +15,6 @@ object ApiFactory {
             .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
             .build()
     }
-
     inline fun <reified T> create(): T = retrofit.create(T::class.java)
 }
 
