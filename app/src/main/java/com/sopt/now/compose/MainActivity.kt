@@ -50,7 +50,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScaffold(navController: NavHostController, content: @Composable () -> Unit) {
     val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
-    val showBottomBar = currentRoute != "login" && currentRoute != "signup"
+    val showBottomBar = currentRoute != "login/{userId}" && currentRoute != "signup"
 
     BackOnPressed()
     Scaffold(
