@@ -100,7 +100,6 @@ fun LoginScreen(
         Text(
             text = stringResource(id = R.string.ID)
         )
-
         TextField(
             value = userId,
             onValueChange = { userId = it },
@@ -116,7 +115,6 @@ fun LoginScreen(
         Text(
             text = stringResource(id = R.string.PW)
         )
-
         TextField(
             value = userPw,
             onValueChange = { userPw = it },
