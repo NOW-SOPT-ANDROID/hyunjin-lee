@@ -42,7 +42,6 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
                             )
                         )
                     }
-                    Log.d("login", "data: $data, userId: $memberId")
                 } else {
                     // 오류 응답 처리
                     val error = response.errorBody()?.string()

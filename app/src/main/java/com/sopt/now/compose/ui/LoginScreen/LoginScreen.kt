@@ -61,13 +61,18 @@ fun LoginScreen(
     val memberId = navBackStackEntry.arguments?.getString("memberId") ?: ""
     Log.d("loginscreen", memberId)
     LaunchedEffect(memberId) {
-        mainViewModel.getUserInfo(memberId)
+        if (memberId.isNotEmpty()) {
+            mainViewModel.getUserInfo(memberId)
+        }
+    }
+
+    LaunchedEffect(userState) {
         if (userState.isSuccess) {
             // 사용자 아이디를 EditText에 설정
             userId = userState.userId ?: ""
             // 회원 조회 성공 메시지 표시
             Toast.makeText(context, userState.message, Toast.LENGTH_SHORT).show()
-        } else {
+        } else if (userState.userId.isNullOrEmpty().not()) {
             // 회원 조회 실패 메시지 표시
             Toast.makeText(context, userState.message, Toast.LENGTH_SHORT).show()
         }

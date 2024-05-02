@@ -1,6 +1,7 @@
 package com.sopt.now.compose
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
@@ -22,6 +23,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     // 회원가입 정보 받아오기
     fun getUserInfo(memberIdString: String) {
         val memberId = memberIdString.toIntOrNull()?:0
+        Log.d("mainvew", "$memberId")
         authService.getUserInfo(memberId).enqueue(object : Callback<ResponseUserDto> {
             override fun onResponse(
                 call: Call<ResponseUserDto>,
@@ -37,10 +39,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                             UserState(
                                 isSuccess = true,
                                 message = "회원 조회 성공: ${data?.message}",
-                                userId = authenticationId
+                                userId = authenticationId.toString()
                             )
                         )
                     }
+                    Log.d("mainvew", authenticationId.toString())
                 } else {
                     // 오류 응답 처리
                     val error = response.errorBody()?.string()

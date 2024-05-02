@@ -16,7 +16,6 @@ import retrofit2.Response
 
 class SignUpViewModel() : ViewModel() {
     private val authService by lazy { ServicePool.authService }
-    private var isLoading = MutableStateFlow(false)
     private val _signUpState = MutableStateFlow(SignUpState(isSuccess = false, ""))
     val signUpState: StateFlow<SignUpState> = _signUpState
 
@@ -67,7 +66,6 @@ class SignUpViewModel() : ViewModel() {
             }
             override fun onFailure(call: Call<ResponseSignUpDto>, t: Throwable) {
                 viewModelScope.launch {
-                    isLoading.emit(false) // 요청 실패 시 isLoading 상태 변경
                     _signUpState.emit(
                         SignUpState(
                             isSuccess = false,
