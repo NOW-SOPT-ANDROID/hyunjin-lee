@@ -11,12 +11,14 @@
 
     <string name="profile_music">프로필 뮤직</string>
 
+    <string name="mypage">마이페이지</string>
     <string name="signup">회원가입</string>
     <string name="bt_signup">회원가입 하기</string>
     <string name="id">ID</string>
     <string name="input_id">아이디를 입력해주세요</string>
     <string name="passowrd">Password</string>
     <string name="input_pw">비밀번호를 입력해주세요</string>
+    <string name="change_pw">비밀번호 변경</string>
     <string name="name">이름</string>
     <string name="input_name">이름을 입력해주세요</string>
     <string name="phone">전화번호</string>
