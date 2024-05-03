@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/change_password_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_change_pw_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/change_pw"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_changepw_pre"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="현재 비밀번호"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_change_pw_title" />
+
+    <EditText
+        android:id="@+id/et_changepw_pre"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/input_pw"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_marginHorizontal="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_changepw_pre" />
+
+    <TextView
+        android:id="@+id/tv_changepw_new"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="새로운 비밀번호"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_changepw_pre" />
+
+    <EditText
+        android:id="@+id/et_changepw_new"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/input_pw"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_marginHorizontal="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_changepw_new" />
+
+    <TextView
+        android:id="@+id/tv_changepw_new_verify"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="새로운 비밀번호 확인"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_changepw_new" />
+
+    <EditText
+        android:id="@+id/et_changepw_new_verify"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/input_pw"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_marginHorizontal="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_changepw_new_verify" />
+
+    <Button
+        android:id="@+id/bt_mypage_change_password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/change_pw"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
