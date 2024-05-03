@@ -1,7 +1,6 @@
 package com.sopt.now.presentation.auth.login
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
@@ -79,7 +78,6 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
                         message = "로그인 성공 유저의 ID는 $memberId 입니둥",
                         memberId = memberId
                     )
-                    Log.d("login", "data: $data, userId: $memberId")
                 } else {
                     // 오류 응답 처리
                     val error = response.errorBody()?.string()
