@@ -9,14 +9,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
-import com.sopt.now.MyApplication
 import com.sopt.now.data.MyPage.MyPageState
 import com.sopt.now.databinding.FragmentMypageBinding
 import com.sopt.now.presentation.auth.login.LoginActivity
-import com.sopt.now.presentation.auth.signup.SignUpActivity
-import com.sopt.now.presentation.main.MainViewModel
-import kotlinx.coroutines.launch
 
 class MyPageFragment : Fragment(){
     private var _binding: FragmentMypageBinding? = null
@@ -40,12 +35,10 @@ class MyPageFragment : Fragment(){
     }
 
     private fun initViews() {
-//        // logout 버튼 기능
-//        binding.btMypageLogoutButton.setOnClickListener{
-//            Log.d("logout" ,"$...")
-//            MyApplication.prefs.clearUserData()
-//            navigateToLogin()
-//        }
+        // 비밀번호 변경 버튼 기능
+        binding.btMypageChangePassword.setOnClickListener{
+            navigateToChangePW()
+        }
     }
 
     private fun initObserver() {
@@ -73,6 +66,15 @@ class MyPageFragment : Fragment(){
     // 로그인 화면으로 이동하는 메서드
     private fun navigateToLogin() {
         val intent = Intent(activity, LoginActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        startActivity(intent)
+        activity?.finish() // 현재 액티비티 종료
+    }
+
+    // 비밀번호 변경 activity로 이동하는 메서드
+    private fun navigateToChangePW() {
+        val intent = Intent(activity, ChangePasswordActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
         startActivity(intent)
