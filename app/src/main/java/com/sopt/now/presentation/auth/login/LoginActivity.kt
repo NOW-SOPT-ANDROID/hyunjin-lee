@@ -46,6 +46,7 @@ class LoginActivity : AppCompatActivity() {
         }
         viewModel.login_liveData.observe(this) { loginState ->
             if (loginState.isSuccess) {
+                saveMemberId(loginState.memberId.toString())
                 navigateToMain()
             }
         }
@@ -69,6 +70,11 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, userState.message, Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    fun saveMemberId(memberId: String) {
+        val sharedPreferences = getSharedPreferences("MyAppPreferences", MODE_PRIVATE)
+        sharedPreferences.edit().putString("memberId", memberId).apply()
     }
 
     private fun navigateToMain() {
