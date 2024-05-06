@@ -19,8 +19,16 @@
     <string name="passowrd">Password</string>
     <string name="input_pw">비밀번호를 입력해주세요</string>
     <string name="change_pw">비밀번호 변경</string>
+    <string name="change_pw_success">비밀번호 변경 성공</string>
+    <string name="change_pw_fail">비밀번호 변경 실패</string>
+
     <string name="name">이름</string>
     <string name="input_name">이름을 입력해주세요</string>
     <string name="phone">전화번호</string>
     <string name="input_phone">전화번호를 입력해주세요</string>
+
+    <string name="fail_data">데이터 로드 실패</string>
+    <string name="fail_network">네트워크 연결 실패</string>
+
+    <string name="back_pressed">뒤로가기를 한번 더 누르면 종료됩니다.</string>
 </resources>
