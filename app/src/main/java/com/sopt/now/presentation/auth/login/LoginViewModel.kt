@@ -7,7 +7,7 @@ import com.google.gson.Gson
 import com.sopt.now.data.auth.LoginData.LoginState
 import com.sopt.now.data.auth.LoginData.RequestLoginDto
 import com.sopt.now.data.auth.LoginData.ResponseLoginDto
-import com.sopt.now.data.auth.ServicePool
+import com.sopt.now.data.ServicePool
 import com.sopt.now.data.auth.User.ResponseUserDto
 import com.sopt.now.data.auth.User.UserState
 import retrofit2.Call

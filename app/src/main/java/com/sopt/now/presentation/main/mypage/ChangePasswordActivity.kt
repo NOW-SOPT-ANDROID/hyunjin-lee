@@ -18,8 +18,8 @@ class ChangePasswordActivity : AppCompatActivity() {
         binding = ActivityChangePwBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val sharedPreferences = getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE)
-        val memberId = sharedPreferences.getString("memberId", "") ?: ""
+        val sharedPreferences = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
+        val memberId = sharedPreferences.getString(MEMBER_ID, "") ?: ""
 
         initViews(memberId)
         observeViewModel()
@@ -50,5 +50,10 @@ class ChangePasswordActivity : AppCompatActivity() {
         }
         startActivity(intent)
         finish() // 현재 액티비티 종료
+    }
+
+    companion object {
+        private const val APP_PREFERENCES = "MyAppPreferences"
+        private const val MEMBER_ID = "memberId"
     }
 }
