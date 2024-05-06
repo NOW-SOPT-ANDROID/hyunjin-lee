@@ -1,12 +1,13 @@
 package com.sopt.now.presentation.main.search
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.sopt.now.R
 import com.sopt.now.databinding.FragmentSearchBinding
 import com.sopt.now.presentation.main.search.repo.Repo
 import com.sopt.now.presentation.main.search.repo.RepoAdapter
@@ -41,7 +42,7 @@ class SearchFragment: Fragment() {
             }
 
             override fun onFailure(call: Call<List<Repo>>, t: Throwable) {
-                Log.d("search", "오류..")
+                Toast.makeText(context, R.string.fail_network, Toast.LENGTH_SHORT).show()
             }
         })
     }

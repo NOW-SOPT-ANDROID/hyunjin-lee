@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.sopt.now.data.auth.SignUpData.RequestSignUpDto
 import com.sopt.now.data.auth.SignUpData.ResponseSignUpDto
-import com.sopt.now.data.auth.ServicePool
+import com.sopt.now.data.ServicePool
 import com.sopt.now.data.auth.SignUpData.SignUpState
 import retrofit2.Call
 import retrofit2.Callback

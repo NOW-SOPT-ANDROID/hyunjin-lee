@@ -2,7 +2,6 @@ package com.sopt.now.presentation.main.mypage
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,7 +47,7 @@ class MyPageFragment : Fragment(){
     }
 
     private fun setUserData() {
-        val memberId = activity?.intent?.getStringExtra("memberId") ?: "0"
+        val memberId = activity?.intent?.getStringExtra(MEMBER_ID) ?: "0"
         my_viewModel.getUserInfo(memberId.toInt())
     }
 
@@ -84,5 +83,9 @@ class MyPageFragment : Fragment(){
     override fun onDestroyView() {
         _binding = null // 메모리 누수 방지를 위해 뷰 바인딩 참조 해제
         super.onDestroyView()
+    }
+
+    companion object {
+        private const val MEMBER_ID = "memberId"
     }
 }

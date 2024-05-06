@@ -2,11 +2,9 @@ package com.sopt.now.presentation.main
 
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.sopt.now.R
-import com.sopt.now.data.User.UserViewModelFactory
 import com.sopt.now.databinding.ActivityMainBinding
 import com.sopt.now.presentation.main.home.HomeFragment
 import com.sopt.now.presentation.main.mypage.MyPageFragment
@@ -14,9 +12,6 @@ import com.sopt.now.presentation.main.search.SearchFragment
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-    private val viewModel by viewModels<MainViewModel> {
-        UserViewModelFactory(application)
-    }
     private var backPressedTime: Long = 0
     private var lastSelectedItemId = R.id.menu_home // 초기 선택된 탭 지정
 
@@ -25,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // userId를 Intent에서 가져옴
-        val memberId = intent.getStringExtra("memberId")
+        val memberId = intent.getStringExtra(MEMBER_ID)
 
         replaceFragment(HomeFragment())
         // 바텀 네비게이션 클릭 이벤트 처리 함수 호출
@@ -39,7 +34,7 @@ class MainActivity : AppCompatActivity() {
             super.onBackPressed()
             return
         } else {
-            Toast.makeText(this, "뒤로가기를 한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.back_pressed, Toast.LENGTH_SHORT).show()
         }
         backPressedTime = System.currentTimeMillis()
     }
@@ -64,7 +59,7 @@ class MainActivity : AppCompatActivity() {
                     R.id.menu_mypage -> { // my page 선택
                         val myPageFragment = MyPageFragment().apply {
                             arguments = Bundle().apply {
-                                putString("memberId", memberId) // userId를 MyPageFragment에 전달
+                                putString(MEMBER_ID, memberId) // userId를 MyPageFragment에 전달
                             }
                         }
                         replaceFragment(myPageFragment)
@@ -94,5 +89,6 @@ class MainActivity : AppCompatActivity() {
     companion object {
         // 앱이 종료되는 최대 시간
         const val BACK_PRESSED_DURATION = 2000L
+        private const val MEMBER_ID = "memberId"
     }
 }

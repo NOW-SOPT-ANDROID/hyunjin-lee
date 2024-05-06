@@ -4,9 +4,10 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
+import com.sopt.now.R
 import com.sopt.now.data.MyPage.MyPageState
 import com.sopt.now.data.auth.LoginData.ResponseLoginDto
-import com.sopt.now.data.auth.ServicePool
+import com.sopt.now.data.ServicePool
 import com.sopt.now.data.auth.User.RequestUserPasswordDto
 import com.sopt.now.data.auth.User.ResponseUserDto
 import com.sopt.now.data.auth.User.ResponseUserPasswordDto
@@ -101,7 +102,7 @@ class MyPageViewModel(application: Application) : AndroidViewModel(application) 
                     val data: ResponseUserPasswordDto? = response.body()
                     _newpassword.value = UserPasswordState(
                         isSuccess = true,
-                        message = "비밀번호 변경 성공"
+                        message = "${R.string.change_pw_success}"
                     )
                 } else {
                     // 오류 응답 처리
@@ -111,12 +112,12 @@ class MyPageViewModel(application: Application) : AndroidViewModel(application) 
                         val errorResponse = gson.fromJson(error, ResponseUserPasswordDto::class.java)
                         _newpassword.value = UserPasswordState(
                             isSuccess = false,
-                            message = "비밀번호 변경 실패: ${errorResponse.message}"
+                            message = "${R.string.fail_data} + ${errorResponse.message}"
                         )
                     } catch (e: Exception) {
                         _newpassword.value = UserPasswordState(
                             isSuccess = false,
-                            message = "비밀번호 변경 실패: 에러 메시지 파싱 실패"
+                            message = "${R.string.fail_data} + : 에러 메시지 파싱 실패"
                         )
                     }
                 }
@@ -124,7 +125,7 @@ class MyPageViewModel(application: Application) : AndroidViewModel(application) 
 
             override fun onFailure(call: Call<ResponseUserPasswordDto>, t: Throwable) {
                 // 네트워크 오류 등 서버 에러 처리
-                _newpassword.value = UserPasswordState(isSuccess = false, message = "서버 에러: ${t.message}")
+                _newpassword.value = UserPasswordState(isSuccess = false, message = "${R.string.fail_network}: ${t.message}")
             }
         })
     }
