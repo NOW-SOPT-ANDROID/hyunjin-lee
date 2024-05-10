@@ -1,12 +1,12 @@
 package com.sopt.now.compose.data.auth.LoginData
 
-import kotlinx.serialization.SerialName
+import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class RequestLoginDto(
-    @SerialName("authenticationId")
+    @SerializedName("authenticationId")
     val authenticationId: String,
-    @SerialName("password")
+    @SerializedName("password")
     val password: String
 )

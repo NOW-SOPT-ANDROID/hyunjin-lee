@@ -4,13 +4,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.sopt.now.compose.MainViewModel
+import com.sopt.now.compose.ui.HomeScreen.FriendViewModel
 import com.sopt.now.compose.ui.HomeScreen.HomeScreen
 import com.sopt.now.compose.ui.LoginScreen.LoginScreen
 import com.sopt.now.compose.ui.LoginScreen.LoginViewModel
@@ -25,10 +25,11 @@ fun Navigation(navController: NavHostController) {
     val loginViewModel: LoginViewModel = viewModel(LocalContext.current as ViewModelStoreOwner)
     val myPageViewModel: MyPageViewModel = viewModel(LocalContext.current as ViewModelStoreOwner)
     val mainViewModel: MainViewModel = viewModel(LocalContext.current as ViewModelStoreOwner)
+    val friendViewModel: FriendViewModel = viewModel(LocalContext.current as ViewModelStoreOwner)
 
     NavHost(navController = navController, startDestination = "login/{userId}") {
         composable("home") {
-            HomeScreen()
+            HomeScreen(friendViewModel)
         }
         composable("mypage") {
             MypageScreen(myPageViewModel = myPageViewModel, navController = navController)
