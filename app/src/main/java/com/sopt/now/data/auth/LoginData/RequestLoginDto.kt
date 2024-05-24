@@ -8,5 +8,5 @@ data class RequestLoginDto(
     @SerialName("authenticationId")
     val authenticationId: String,
     @SerialName("password")
-    val password: String
+    val password: String,
 )

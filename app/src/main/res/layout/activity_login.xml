@@ -12,9 +12,9 @@
         android:id="@+id/tv_login_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:text="Welcome to SOPT"
         android:textSize="30dp"
-        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,9 +23,9 @@
         android:id="@+id/tv_login_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:text="ID"
         android:textSize="20dp"
-        android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_login_title" />
 
@@ -33,11 +33,11 @@
         android:id="@+id/et_login_id"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="아이디를 입력해주세요"
         android:layout_marginTop="10dp"
+        android:hint="아이디를 입력해주세요"
         android:singleLine="true"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_login_id" />/>
 
 
@@ -45,9 +45,9 @@
         android:id="@+id/tv_login_pw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:text="비밀번호"
         android:textSize="20dp"
-        android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_login_id" />
 
@@ -55,11 +55,11 @@
         android:id="@+id/et_login_pw"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="비밀번호를 입력해주세요"
         android:layout_marginTop="10dp"
+        android:hint="비밀번호를 입력해주세요"
         android:singleLine="true"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_login_pw" />/>
 
     <CheckBox
@@ -70,7 +70,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_login_pw"/>
+        app:layout_constraintTop_toBottomOf="@id/et_login_pw" />
 
     <TextView
         android:id="@+id/tv_login_signup_button"
@@ -78,9 +78,9 @@
         android:layout_height="wrap_content"
         android:text="회원가입"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bt_login_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bt_login_button"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/bt_login_button"
@@ -88,7 +88,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="60dp"
         android:text="로그인 하기"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

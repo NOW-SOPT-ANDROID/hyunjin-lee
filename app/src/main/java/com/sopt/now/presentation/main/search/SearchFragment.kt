@@ -15,13 +15,13 @@ import com.sopt.now.data.RetrofitClient
 import retrofit2.Call
 import retrofit2.Response
 
-class SearchFragment: Fragment() {
+class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         return binding.root

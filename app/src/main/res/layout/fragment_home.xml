@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_myprofile"
@@ -13,23 +13,23 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_friend"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:listitem="@layout/item_friend" />
 
     <LinearLayout
         android:id="@+id/ll_page_buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_horizontal" />
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/bt_home_floating_action_button"
+        style="?attr/floatingActionButtonSmallStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        style="?attr/floatingActionButtonSmallStyle"
         android:contentDescription="@string/fab_content_desc"
         app:srcCompat="@drawable/ic_plus_white_24"
         tools:ignore="MissingConstraints" />

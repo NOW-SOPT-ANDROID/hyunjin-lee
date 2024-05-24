@@ -12,10 +12,10 @@
         android:id="@+id/tv_signup_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:text="@string/signup"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,9 +24,9 @@
         android:id="@+id/tv_signup_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
         android:text="@string/id"
         android:textSize="20sp"
-        android:layout_marginTop="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_signup_title" />
 
@@ -34,20 +34,20 @@
         android:id="@+id/et_signup_id"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/input_id"
         android:layout_marginTop="10dp"
+        android:hint="@string/input_id"
         android:singleLine="true"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_signup_id" />
 
     <TextView
         android:id="@+id/tv_signup_pw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:text="@string/passowrd"
         android:textSize="20sp"
-        android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_signup_id" />
 
@@ -55,20 +55,20 @@
         android:id="@+id/et_signup_pw"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/input_pw"
         android:layout_marginTop="10dp"
+        android:hint="@string/input_pw"
         android:singleLine="true"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_signup_pw" />
 
     <TextView
         android:id="@+id/tv_signup_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:text="@string/name"
         android:textSize="20sp"
-        android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_signup_pw" />
 
@@ -76,21 +76,21 @@
         android:id="@+id/et_signup_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/input_name"
         android:layout_marginTop="10dp"
-        android:singleLine="true"
+        android:hint="@string/input_name"
         android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_signup_nickname" />
 
     <TextView
         android:id="@+id/tv_signup_mbti"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:text="@string/phone"
         android:textSize="20sp"
-        android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_signup_name" />
 
@@ -98,12 +98,12 @@
         android:id="@+id/et_signup_mbti"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/input_phone"
         android:layout_marginTop="10dp"
-        android:singleLine="true"
+        android:hint="@string/input_phone"
         android:inputType="phone"
-        app:layout_constraintStart_toStartOf="parent"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_signup_mbti" />
 
     <Button
@@ -112,9 +112,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="60dp"
         android:text="@string/bt_signup"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_signup_mbti"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_signup_mbti" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

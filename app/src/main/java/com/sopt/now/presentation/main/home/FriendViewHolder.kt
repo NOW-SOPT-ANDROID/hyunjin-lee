@@ -5,7 +5,8 @@ import com.bumptech.glide.Glide
 import com.sopt.now.data.Friend.Friend_
 import com.sopt.now.databinding.ItemFriendBinding
 
-class FriendViewHolder(private val binding: ItemFriendBinding) : RecyclerView.ViewHolder(binding.root) {
+class FriendViewHolder(private val binding: ItemFriendBinding) :
+    RecyclerView.ViewHolder(binding.root) {
     fun bind(friend: Friend_) {
         // 이름, 이메일 바인딩
         binding.tvName.text = "${friend.first_name} ${friend.last_name}"

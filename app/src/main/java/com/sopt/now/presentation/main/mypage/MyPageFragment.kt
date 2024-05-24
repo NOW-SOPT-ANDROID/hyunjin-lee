@@ -12,7 +12,7 @@ import com.sopt.now.data.MyPage.MyPageState
 import com.sopt.now.databinding.FragmentMypageBinding
 import com.sopt.now.presentation.auth.login.LoginActivity
 
-class MyPageFragment : Fragment(){
+class MyPageFragment : Fragment() {
     private var _binding: FragmentMypageBinding? = null
     private val binding: FragmentMypageBinding
         get() = requireNotNull(_binding)
@@ -20,7 +20,7 @@ class MyPageFragment : Fragment(){
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentMypageBinding.inflate(inflater, container, false)
         return binding.root
@@ -35,7 +35,7 @@ class MyPageFragment : Fragment(){
 
     private fun initViews() {
         // 비밀번호 변경 버튼 기능
-        binding.btMypageChangePassword.setOnClickListener{
+        binding.btMypageChangePassword.setOnClickListener {
             navigateToChangePW()
         }
     }

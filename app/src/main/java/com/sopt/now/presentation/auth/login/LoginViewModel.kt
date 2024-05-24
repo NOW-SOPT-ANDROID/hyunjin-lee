@@ -96,6 +96,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
                     }
                 }
             }
+
             override fun onFailure(call: Call<ResponseLoginDto>, t: Throwable) {
                 login_liveData.value = LoginState(
                     isSuccess = false,

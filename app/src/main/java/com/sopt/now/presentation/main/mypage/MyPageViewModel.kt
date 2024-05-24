@@ -74,7 +74,12 @@ class MyPageViewModel(application: Application) : AndroidViewModel(application) 
         })
     }
 
-    fun patchUserPassword(memberId: String, previous: String, new: String, newVerification: String) {
+    fun patchUserPassword(
+        memberId: String,
+        previous: String,
+        new: String,
+        newVerification: String,
+    ) {
         // 일단 이전 비밀번호, 새 비밀번호, 새 비밀번호 확인이 유효한지 체크
         if (new != newVerification) {
             _newpassword.value = UserPasswordState(
@@ -92,41 +97,46 @@ class MyPageViewModel(application: Application) : AndroidViewModel(application) 
         )
 
         // API 호출을 통해 서버에 비밀번호 변경 요청
-        authService.patchUserPassword(memberId.toInt(), requestBody).enqueue(object : Callback<ResponseUserPasswordDto> {
-            override fun onResponse(
-                call: Call<ResponseUserPasswordDto>,
-                response: Response<ResponseUserPasswordDto>,
-            ) {
-                if (response.isSuccessful) {
-                    // 비밀번호 변경 성공 처리
-                    val data: ResponseUserPasswordDto? = response.body()
-                    _newpassword.value = UserPasswordState(
-                        isSuccess = true,
-                        message = "${R.string.change_pw_success}"
-                    )
-                } else {
-                    // 오류 응답 처리
-                    val error = response.errorBody()?.string()
-                    val gson = Gson()
-                    try {
-                        val errorResponse = gson.fromJson(error, ResponseUserPasswordDto::class.java)
+        authService.patchUserPassword(memberId.toInt(), requestBody)
+            .enqueue(object : Callback<ResponseUserPasswordDto> {
+                override fun onResponse(
+                    call: Call<ResponseUserPasswordDto>,
+                    response: Response<ResponseUserPasswordDto>,
+                ) {
+                    if (response.isSuccessful) {
+                        // 비밀번호 변경 성공 처리
+                        val data: ResponseUserPasswordDto? = response.body()
                         _newpassword.value = UserPasswordState(
-                            isSuccess = false,
-                            message = "${R.string.fail_data} + ${errorResponse.message}"
+                            isSuccess = true,
+                            message = "${R.string.change_pw_success}"
                         )
-                    } catch (e: Exception) {
-                        _newpassword.value = UserPasswordState(
-                            isSuccess = false,
-                            message = "${R.string.fail_data} + : 에러 메시지 파싱 실패"
-                        )
+                    } else {
+                        // 오류 응답 처리
+                        val error = response.errorBody()?.string()
+                        val gson = Gson()
+                        try {
+                            val errorResponse =
+                                gson.fromJson(error, ResponseUserPasswordDto::class.java)
+                            _newpassword.value = UserPasswordState(
+                                isSuccess = false,
+                                message = "${R.string.fail_data} + ${errorResponse.message}"
+                            )
+                        } catch (e: Exception) {
+                            _newpassword.value = UserPasswordState(
+                                isSuccess = false,
+                                message = "${R.string.fail_data} + : 에러 메시지 파싱 실패"
+                            )
+                        }
                     }
                 }
-            }
 
-            override fun onFailure(call: Call<ResponseUserPasswordDto>, t: Throwable) {
-                // 네트워크 오류 등 서버 에러 처리
-                _newpassword.value = UserPasswordState(isSuccess = false, message = "${R.string.fail_network}: ${t.message}")
-            }
-        })
+                override fun onFailure(call: Call<ResponseUserPasswordDto>, t: Throwable) {
+                    // 네트워크 오류 등 서버 에러 처리
+                    _newpassword.value = UserPasswordState(
+                        isSuccess = false,
+                        message = "${R.string.fail_network}: ${t.message}"
+                    )
+                }
+            })
     }
 }

@@ -25,7 +25,7 @@ class HomeFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
@@ -60,22 +60,26 @@ class HomeFragment : Fragment() {
     }
 
     private fun loadFriends(pageNumber: Int) {
-        ServicePool.friendService.getUsers(pageNumber).enqueue(object : Callback<ResponseFriendDto> {
-            override fun onResponse(call: Call<ResponseFriendDto>, response: Response<ResponseFriendDto>) {
-                if (response.isSuccessful) {
-                    response.body()?.let {
-                        friendListAdapter.submitList(it.data)
-                        setupPageButtons(it.total_pages) // 페이지 버튼 설정
+        ServicePool.friendService.getUsers(pageNumber)
+            .enqueue(object : Callback<ResponseFriendDto> {
+                override fun onResponse(
+                    call: Call<ResponseFriendDto>,
+                    response: Response<ResponseFriendDto>,
+                ) {
+                    if (response.isSuccessful) {
+                        response.body()?.let {
+                            friendListAdapter.submitList(it.data)
+                            setupPageButtons(it.total_pages) // 페이지 버튼 설정
+                        }
+                    } else {
+                        Snackbar.make(binding.root, R.string.fail_data, LENGTH_SHORT).show()
                     }
-                } else {
-                    Snackbar.make(binding.root, R.string.fail_data, LENGTH_SHORT).show()
                 }
-            }
 
-            override fun onFailure(call: Call<ResponseFriendDto>, t: Throwable) {
-                Snackbar.make(binding.root, R.string.fail_network, LENGTH_SHORT).show()
-            }
-        })
+                override fun onFailure(call: Call<ResponseFriendDto>, t: Throwable) {
+                    Snackbar.make(binding.root, R.string.fail_network, LENGTH_SHORT).show()
+                }
+            })
     }
 
     fun scrollToTop() {

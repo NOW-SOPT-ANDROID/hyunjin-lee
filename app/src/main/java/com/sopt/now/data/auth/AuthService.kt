@@ -33,6 +33,6 @@ interface AuthService {
     @PATCH("member/password")
     fun patchUserPassword(
         @Header("memberid") memberId: Int,
-        @Body request: RequestUserPasswordDto
+        @Body request: RequestUserPasswordDto,
     ): Call<ResponseUserPasswordDto>
 }

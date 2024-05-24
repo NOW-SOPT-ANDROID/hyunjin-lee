@@ -49,6 +49,7 @@ class SignUpViewModel(application: Application) : AndroidViewModel(application) 
                     }
                 }
             }
+
             override fun onFailure(call: Call<ResponseSignUpDto>, t: Throwable) {
                 liveData.value = SignUpState(
                     isSuccess = false,

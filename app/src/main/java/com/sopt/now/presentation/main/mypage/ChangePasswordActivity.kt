@@ -31,7 +31,12 @@ class ChangePasswordActivity : AppCompatActivity() {
             val newPassword = binding.etChangepwNew.text.toString()
             val newPasswordVerification = binding.etChangepwNewVerify.text.toString()
 
-            viewModel.patchUserPassword(memberId, currentPassword, newPassword, newPasswordVerification)
+            viewModel.patchUserPassword(
+                memberId,
+                currentPassword,
+                newPassword,
+                newPasswordVerification
+            )
         }
     }
 

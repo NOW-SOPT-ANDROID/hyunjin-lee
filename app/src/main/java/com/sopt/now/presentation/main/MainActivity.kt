@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setBottomNavigation(memberId: String?) {
         // 바텀 네비게이션 아이템 선택 리스너 설정
-        binding.bnvHome.setOnItemSelectedListener{ it ->
+        binding.bnvHome.setOnItemSelectedListener { it ->
             if (it.itemId == lastSelectedItemId) {
                 // 같은 탭을 다시 선택한 경우
                 scrollToTop()

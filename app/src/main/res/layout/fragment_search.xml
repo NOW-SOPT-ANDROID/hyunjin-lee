@@ -11,10 +11,10 @@
         android:id="@+id/tv_search_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:text="탐색"
         android:textSize="20dp"
         android:textStyle="bold"
-        android:layout_marginTop="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,9 +24,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        tools:listitem="@layout/item_repo_list"
-        app:layout_constraintTop_toBottomOf="@id/tv_search_title"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/tv_search_title"
+        tools:listitem="@layout/item_repo_list" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,7 +9,7 @@ import com.sopt.now.data.auth.SignUpData.RequestSignUpDto
 import com.sopt.now.databinding.ActivitySignupBinding
 import com.sopt.now.presentation.auth.login.LoginActivity
 
-class SignUpActivity : AppCompatActivity()  {
+class SignUpActivity : AppCompatActivity() {
     private val binding by lazy { ActivitySignupBinding.inflate(layoutInflater) }
     private val viewModel: SignUpViewModel by viewModels()
 

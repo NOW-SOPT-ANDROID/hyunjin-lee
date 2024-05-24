@@ -12,9 +12,9 @@
         android:background="@drawable/ic_sopt_bg"
         android:contentDescription="@string/app_name"
         android:scaleType="center"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_dialog_name"
@@ -23,11 +23,11 @@
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="10dp"
         android:text="@string/name"
-        android:textSize="20sp"
         android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/iv_dialog_title"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/iv_dialog_title" />
 
     <EditText
         android:id="@+id/et_dialog_username"
@@ -35,9 +35,9 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:hint="username"
-        app:layout_constraintTop_toBottomOf="@id/tv_dialog_name"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_dialog_name" />
 
     <TextView
         android:id="@+id/tv_dialog_profilemusic"
@@ -46,11 +46,11 @@
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="10dp"
         android:text="@string/profile_music"
-        android:textSize="20sp"
         android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/et_dialog_username"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/et_dialog_username" />
 
     <EditText
         android:id="@+id/et_dialog_profilemusic"
@@ -58,28 +58,28 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:hint="@string/profile_music"
-        app:layout_constraintTop_toBottomOf="@id/tv_dialog_profilemusic"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_dialog_profilemusic" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/bt_dialog_approve_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
         android:backgroundTint="@color/green"
         android:text="확인"
-        android:layout_marginRight="10dp"
-        app:layout_constraintTop_toBottomOf="@id/et_dialog_profilemusic"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_dialog_profilemusic" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/bt_dialog_cancel_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:backgroundTint="@color/green"
         android:text="취소"
-        android:layout_marginLeft="10dp"
-        app:layout_constraintTop_toBottomOf="@id/et_dialog_profilemusic"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_dialog_profilemusic" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
