@@ -15,7 +15,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
-import com.sopt.now.BuildConfig.AUTH_FRIEND_URL
+import com.sopt.now.compose.BuildConfig.AUTH_FRIEND_URL
 import com.sopt.now.compose.data.friend.Friend_
 
 

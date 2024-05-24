@@ -1,6 +1,6 @@
 package com.sopt.now.compose.data.auth
 
-import com.sopt.now.BuildConfig
+import com.sopt.now.compose.BuildConfig
 import com.sopt.now.compose.data.friend.FriendService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
