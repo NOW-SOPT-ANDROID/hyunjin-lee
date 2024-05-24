@@ -10,7 +10,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 
-// 뒤로 가기 두 번 눌렀을
+// 뒤로 가기 두 번 눌렀을 때
 @Composable
 fun BackOnPressed() {
     val context = LocalContext.current
@@ -18,7 +18,7 @@ fun BackOnPressed() {
     var backPressedTime = 0L
 
     BackHandler(enabled = backPressedState) {
-        if(System.currentTimeMillis() - backPressedTime <= 2000) {
+        if (System.currentTimeMillis() - backPressedTime <= 2000) {
             // 앱 종료
             (context as Activity).finish()
         } else {

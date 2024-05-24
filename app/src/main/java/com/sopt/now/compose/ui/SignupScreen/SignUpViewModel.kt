@@ -64,6 +64,7 @@ class SignUpViewModel() : ViewModel() {
                     }
                 }
             }
+
             override fun onFailure(call: Call<ResponseSignUpDto>, t: Throwable) {
                 viewModelScope.launch {
                     _signUpState.emit(

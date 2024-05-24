@@ -42,7 +42,7 @@ fun LoginScreen(
     loginViewModel: LoginViewModel,
     mainViewModel: MainViewModel,
     navController: NavController,
-    navBackStackEntry: NavBackStackEntry
+    navBackStackEntry: NavBackStackEntry,
 ) {
     val context = LocalContext.current
     var expanded = remember { mutableStateOf(false) }
@@ -51,7 +51,12 @@ fun LoginScreen(
     val loginState by loginViewModel.loginstate.collectAsState(initial = LoginState(false, ""))
 
     // 사용자 정보 상태 관찰
-    val userState by mainViewModel.userInfo.collectAsState(initial = UserState(isSuccess = false, ""))
+    val userState by mainViewModel.userInfo.collectAsState(
+        initial = UserState(
+            isSuccess = false,
+            ""
+        )
+    )
 
     // 기본값으로 회원가입에서 받아온 값을 사용하되, 사용자 입력을 통해 업데이트될 수 있도록 remember 사용
     var userId by rememberSaveable { mutableStateOf("") }
@@ -79,9 +84,11 @@ fun LoginScreen(
     }
 
     Column(
-        modifier = Modifier.noRippleClickable {
-            expanded.value = !expanded.value
-        }.fillMaxSize()
+        modifier = Modifier
+            .noRippleClickable {
+                expanded.value = !expanded.value
+            }
+            .fillMaxSize()
             .padding(horizontal = 40.dp)
     ) {
         // 20.dp만큼 빈공간 추가

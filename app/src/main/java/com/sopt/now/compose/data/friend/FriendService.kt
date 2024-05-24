@@ -7,6 +7,6 @@ import retrofit2.http.Query
 interface FriendService {
     @GET("api/users")
     fun getUsers(
-        @Query("page") page: Int
+        @Query("page") page: Int,
     ): Call<ResponseFriendDto>
 }

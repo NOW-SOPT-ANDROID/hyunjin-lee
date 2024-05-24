@@ -44,7 +44,12 @@ fun MypageScreen(
     val context = LocalContext.current
 
     // 사용자 정보 상태 관찰
-    val myPageState by myPageViewModel.myInfo.collectAsState(initial = MyPageState(isSuccess = false, ""))
+    val myPageState by myPageViewModel.myInfo.collectAsState(
+        initial = MyPageState(
+            isSuccess = false,
+            ""
+        )
+    )
 
     var userId by rememberSaveable { mutableStateOf("") }
     var userName by rememberSaveable { mutableStateOf("") }

@@ -39,7 +39,12 @@ fun Navigation(navController: NavHostController) {
             arguments = listOf(navArgument("memberId") { type = NavType.StringType })
         ) { backStackEntry ->
             // `LoginScreen`에 `userId` 전달
-            LoginScreen(mainViewModel = mainViewModel, loginViewModel = loginViewModel, navController = navController, navBackStackEntry = backStackEntry)
+            LoginScreen(
+                mainViewModel = mainViewModel,
+                loginViewModel = loginViewModel,
+                navController = navController,
+                navBackStackEntry = backStackEntry
+            )
         }
         composable("signup") {
             SignupScreen(navController = navController, signupViewModel = signupViewModel)

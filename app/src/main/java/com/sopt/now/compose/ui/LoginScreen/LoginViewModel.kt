@@ -2,7 +2,6 @@ package com.sopt.now.compose.ui.LoginScreen
 
 import android.app.Application
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
@@ -68,6 +67,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
                     }
                 }
             }
+
             override fun onFailure(call: Call<ResponseLoginDto>, t: Throwable) {
                 viewModelScope.launch {
                     _loginstate.emit(
@@ -83,8 +83,11 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
     // Shared Preferences에 memberId 저장하는 함수
     private fun saveMemberIdToPreferences(memberId: String?) {
-        val sharedPref = getApplication<Application>().getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE) ?: return
-        with (sharedPref.edit()) {
+        val sharedPref = getApplication<Application>().getSharedPreferences(
+            "MyAppPreferences",
+            Context.MODE_PRIVATE
+        ) ?: return
+        with(sharedPref.edit()) {
             putString("memberId", memberId)
             apply()
         }
