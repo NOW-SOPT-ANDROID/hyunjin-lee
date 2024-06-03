@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -48,7 +49,7 @@ fun LoginScreen(
     var expanded = remember { mutableStateOf(false) }
 
     // 로그인 상태 관찰
-    val loginState by loginViewModel.loginstate.collectAsState(initial = LoginState(false, ""))
+    val loginState by loginViewModel.loginLiveData.observeAsState(initial = LoginState(false, ""))
 
     // 사용자 정보 상태 관찰
     val userState by mainViewModel.userInfo.collectAsState(
