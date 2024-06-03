@@ -52,7 +52,6 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
                         message = "로그인 실패: ${exception.message}"
                     )
                 )
-                Log.d("login", exception.message.toString())
             }
         }
     }

@@ -5,7 +5,6 @@ import com.sopt.now.data.auth.AuthService
 import com.sopt.now.data.auth.LoginData.RequestLoginDto
 import com.sopt.now.data.auth.LoginData.ResponseLoginDto
 import com.sopt.now.data.auth.User.ResponseUserDto
-import retrofit2.Response
 
 class AuthRepository(private val authService: AuthService) {
     suspend fun getUserInfo(memberId: Int): Result<ResponseUserDto> {
