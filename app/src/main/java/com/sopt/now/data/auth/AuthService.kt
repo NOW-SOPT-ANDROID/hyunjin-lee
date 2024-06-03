@@ -8,6 +8,7 @@ import com.sopt.now.data.auth.User.RequestUserPasswordDto
 import com.sopt.now.data.auth.User.ResponseUserDto
 import com.sopt.now.data.auth.User.ResponseUserPasswordDto
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -21,18 +22,18 @@ interface AuthService {
     ): Call<ResponseSignUpDto>
 
     @POST("member/login")
-    fun login(
+    suspend fun login(
         @Body request: RequestLoginDto,
-    ): Call<ResponseLoginDto>
+    ): Response<ResponseLoginDto>
 
     @GET("member/info")
     fun getUserInfo(
-        @Header("memberid") memberId: Int, // Header에 memberId 전달
+        @Header("memberId") memberId: Int, // Header에 memberId 전달
     ): Call<ResponseUserDto>
 
     @PATCH("member/password")
     fun patchUserPassword(
-        @Header("memberid") memberId: Int,
+        @Header("memberId") memberId: Int,
         @Body request: RequestUserPasswordDto,
     ): Call<ResponseUserPasswordDto>
 }

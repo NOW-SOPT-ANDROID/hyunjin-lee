@@ -2,6 +2,7 @@ package com.sopt.now.presentation.auth.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -43,8 +44,7 @@ class LoginActivity : AppCompatActivity() {
                 loginState.message,
                 Toast.LENGTH_SHORT,
             ).show()
-        }
-        viewModel.login_liveData.observe(this) { loginState ->
+
             if (loginState.isSuccess) {
                 saveMemberId(loginState.memberId.toString())
                 navigateToMain()
