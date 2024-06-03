@@ -17,9 +17,9 @@ import retrofit2.http.POST
 
 interface AuthService {
     @POST("member/join")
-    fun signUp(
+    suspend fun signUp(
         @Body request: RequestSignUpDto,
-    ): Call<ResponseSignUpDto>
+    ): Response<ResponseSignUpDto>
 
     @POST("member/login")
     suspend fun login(
