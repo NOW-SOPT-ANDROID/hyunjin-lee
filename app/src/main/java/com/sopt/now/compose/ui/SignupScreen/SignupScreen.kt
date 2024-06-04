@@ -12,8 +12,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -30,6 +30,7 @@ import androidx.navigation.NavController
 import com.sopt.now.compose.R
 import com.sopt.now.compose.component.AppButton
 import com.sopt.now.compose.data.auth.SignUpData.RequestSignUpDto
+import com.sopt.now.compose.data.auth.SignUpData.SignUpState
 
 @Composable
 fun SignupScreen(
@@ -44,7 +45,12 @@ fun SignupScreen(
     var userName by rememberSaveable { mutableStateOf("") }
     var userPhone by rememberSaveable { mutableStateOf("") }
 
-    val signUpState by signupViewModel.signUpState.collectAsState()
+    val signUpState by signupViewModel.signUpLiveData.observeAsState(
+        initial = SignUpState(
+            false,
+            ""
+        )
+    )
 
     Column(
         modifier = modifier
