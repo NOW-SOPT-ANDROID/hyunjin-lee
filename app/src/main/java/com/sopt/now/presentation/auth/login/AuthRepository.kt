@@ -10,55 +10,49 @@ import com.sopt.now.data.auth.User.ResponseUserDto
 
 class AuthRepository(private val authService: AuthService) {
     suspend fun getUserInfo(memberId: Int): Result<ResponseUserDto> {
-        return try {
+        return runCatching {
             val response = authService.getUserInfo(memberId).execute()
             if (response.isSuccessful) {
-                Result.success(response.body()!!)
+                response.body()!!
             } else {
                 val errorBody = response.errorBody()?.string()
                 val errorResponse = Gson().fromJson(errorBody, ResponseUserDto::class.java)
-                Result.failure(Exception(errorResponse.message))
+                throw Exception(errorResponse.message)
             }
-        } catch (e: Exception) {
-            Result.failure(e)
         }
     }
 
     suspend fun login(request: RequestLoginDto): Result<Pair<Int, ResponseLoginDto>> {
-        return try {
+        return runCatching {
             val response = authService.login(request)
             if (response.isSuccessful) {
                 val memberId = response.headers()["location"]?.toIntOrNull()
                 val responseBody = response.body()
                 if (memberId != null && responseBody != null) {
-                    Result.success(Pair(memberId, responseBody))
+                    Pair(memberId, responseBody)
                 } else {
-                    Result.failure(Exception("Invalid response"))
+                    throw Exception("Invalid response")
                 }
             } else {
-                Result.failure(Exception(response.message()))
+                throw Exception(response.message())
             }
-        } catch (e: Exception) {
-            Result.failure(e)
         }
     }
 
     suspend fun signUp(request: RequestSignUpDto): Result<Pair<Int, ResponseSignUpDto>> {
-        return try {
+        return runCatching {
             val response = authService.signUp(request)
             if (response.isSuccessful) {
                 val memberId = response.headers()["location"]?.toIntOrNull()
                 val responseBody = response.body()
                 if (memberId != null && responseBody != null) {
-                    Result.success(Pair(memberId, responseBody))
+                    Pair(memberId, responseBody)
                 } else {
-                    Result.failure(Exception("Invalid response"))
+                    throw Exception("Invalid response")
                 }
             } else {
-                Result.failure(Exception(response.message()))
+                throw Exception(response.message())
             }
-        } catch (e: Exception) {
-            Result.failure(e)
         }
     }
 }
