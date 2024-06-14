@@ -18,8 +18,9 @@ class SignUpViewModel(application: Application) : AndroidViewModel(application) 
 
     fun signUp(request: RequestSignUpDto) {
         viewModelScope.launch {
-            val result = authRepository.signUp(request)
-            result.onSuccess { (memberId, responseBody) ->
+            authRepository.signUp(
+                request
+            ).onSuccess { (memberId, responseBody) ->
                 _signUpState.postValue(
                     SignUpState(
                         isSuccess = true,

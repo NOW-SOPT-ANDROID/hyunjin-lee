@@ -27,7 +27,7 @@ interface AuthService {
     ): Response<ResponseLoginDto>
 
     @GET("member/info")
-    fun getUserInfo(
+    suspend fun getUserInfo(
         @Header("memberId") memberId: Int, // Header에 memberId 전달
     ): Call<ResponseUserDto>
 
