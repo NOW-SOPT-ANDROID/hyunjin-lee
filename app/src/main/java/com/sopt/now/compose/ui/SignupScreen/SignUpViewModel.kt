@@ -1,80 +1,37 @@
 package com.sopt.now.compose.ui.SignupScreen
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.google.gson.Gson
+import com.sopt.now.compose.data.auth.AuthRepository
 import com.sopt.now.compose.data.auth.ServicePool
 import com.sopt.now.compose.data.auth.SignUpData.RequestSignUpDto
-import com.sopt.now.compose.data.auth.SignUpData.ResponseSignUpDto
 import com.sopt.now.compose.data.auth.SignUpData.SignUpState
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
-class SignUpViewModel() : ViewModel() {
-    private val authService by lazy { ServicePool.authService }
-    private val _signUpState = MutableStateFlow(SignUpState(isSuccess = false, ""))
-    val signUpState: StateFlow<SignUpState> = _signUpState
+class SignUpViewModel(application: Application) : AndroidViewModel(application) {
+    private val authRepository by lazy { AuthRepository(ServicePool.authService) }
+    private val _signUpLiveData = MutableLiveData<SignUpState>()
+    val signUpLiveData: LiveData<SignUpState> = _signUpLiveData
 
     fun signUp(request: RequestSignUpDto) {
-        authService.signUp(request).enqueue(object : Callback<ResponseSignUpDto> {
-            override fun onResponse(
-                call: Call<ResponseSignUpDto>,
-                response: Response<ResponseSignUpDto>,
-            ) {
-                if (response.isSuccessful) {
-                    val data: ResponseSignUpDto? = response.body()
-                    val memberId = response.headers()["location"]
-
-                    viewModelScope.launch {
-                        _signUpState.emit(
-                            SignUpState(
-                                isSuccess = true,
-                                message = "회원가입 성공 유저의 ID는 $memberId 입니둥",
-                                memberId = memberId
-                            )
-                        )
-                    }
-                } else {
-                    // 오류 응답 처리
-                    val error = response.errorBody()?.string()
-                    val gson = Gson()
-                    try {
-                        val errorResponse = gson.fromJson(error, ResponseSignUpDto::class.java)
-                        viewModelScope.launch {
-                            _signUpState.emit(
-                                SignUpState(
-                                    isSuccess = false,
-                                    message = "회원가입 실패: ${errorResponse.message}" // 에러 메시지 사용
-                                )
-                            )
-                        }
-                    } catch (e: Exception) {
-                        viewModelScope.launch {
-                            _signUpState.emit(
-                                SignUpState(
-                                    isSuccess = false,
-                                    message = "회원가입 실패: 에러 메시지 파싱 실패"
-                                )
-                            )
-                        }
-                    }
-                }
-            }
-
-            override fun onFailure(call: Call<ResponseSignUpDto>, t: Throwable) {
-                viewModelScope.launch {
-                    _signUpState.emit(
-                        SignUpState(
-                            isSuccess = false,
-                            message = "서버에러"
-                        )
+        viewModelScope.launch {
+            authRepository.signUp(request)
+                .onSuccess { (memberId, responseBody) ->
+                    _signUpLiveData.value = SignUpState(
+                        isSuccess = true,
+                        message = "회원가입 성공 유저의 ID는 $memberId 입니다.",
+                        memberId = memberId.toString()
                     )
                 }
-            }
-        })
+                .onFailure { exception ->
+                    _signUpLiveData.value = SignUpState(
+                        isSuccess = false,
+                        message = "회원가입에 실패했습니다. ${exception.message}"
+                    )
+                }
+        }
     }
 }
