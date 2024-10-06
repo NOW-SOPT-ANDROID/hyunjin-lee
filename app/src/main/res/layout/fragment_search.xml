@@ -2,27 +2,31 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/search"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.main.MainActivity">
+    android:paddingHorizontal="10dp">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fcv_home"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/bnv_home"
+    <TextView
+        android:id="@+id/tv_search_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="탐색"
+        android:textSize="20dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bnv_home"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_repos"
         android:layout_width="0dp"
-        android:layout_height="80dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_home" />
+        app:layout_constraintTop_toBottomOf="@id/tv_search_title"
+        tools:listitem="@layout/item_repo_list" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

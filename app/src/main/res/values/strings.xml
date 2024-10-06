@@ -1,3 +1,34 @@
 <resources>
     <string name="app_name">NOW SOPT Android</string>
+    <string name="isvalid_id">아이디는 6~10 글자여야 합니다.</string>
+    <string name="isvalid_pw">비밀번호는 8~12 글자여야 합니다.</string>
+    <string name="isvalid_name">닉네임은 한 글자 이상이어야 하며, 공백으로만 이루어질 수 없습니다.</string>
+    <string name="isvalid_phone">전화번호를 올바르게 입력해주세요.</string>
+    <string name="fab_content_desc">친구추가</string>
+    <string name="approve">확인</string>
+    <string name="cancel">취소</string>
+    <string name="remove_friend">나 진짜 지울 거니? ㅠㅠ</string>
+
+    <string name="profile_music">프로필 뮤직</string>
+
+    <string name="mypage">마이페이지</string>
+    <string name="signup">회원가입</string>
+    <string name="bt_signup">회원가입 하기</string>
+    <string name="id">ID</string>
+    <string name="input_id">아이디를 입력해주세요</string>
+    <string name="passowrd">Password</string>
+    <string name="input_pw">비밀번호를 입력해주세요</string>
+    <string name="change_pw">비밀번호 변경</string>
+    <string name="change_pw_success">비밀번호 변경 성공</string>
+    <string name="change_pw_fail">비밀번호 변경 실패</string>
+
+    <string name="name">이름</string>
+    <string name="input_name">이름을 입력해주세요</string>
+    <string name="phone">전화번호</string>
+    <string name="input_phone">전화번호를 입력해주세요</string>
+
+    <string name="fail_data">데이터 로드 실패</string>
+    <string name="fail_network">네트워크 연결 실패</string>
+
+    <string name="back_pressed">뒤로가기를 한번 더 누르면 종료됩니다.</string>
 </resources>
