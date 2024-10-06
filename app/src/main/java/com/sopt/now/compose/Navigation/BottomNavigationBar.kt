@@ -15,7 +15,7 @@ import com.sopt.now.compose.R
 @Composable
 fun BottomNavigationBar(
     navController: NavHostController,
-    ) {
+) {
     val items = listOf(
         BottomNavigationItem(
             icon = Icons.Filled.Home,

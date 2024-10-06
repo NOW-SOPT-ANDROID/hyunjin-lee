@@ -20,7 +20,7 @@ import com.sopt.now.compose.util.modifier.noRippleClickable
 fun AppButton(
     text: String,
     padding: PaddingValues = PaddingValues(vertical = 18.dp),
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     Box(
         modifier = Modifier

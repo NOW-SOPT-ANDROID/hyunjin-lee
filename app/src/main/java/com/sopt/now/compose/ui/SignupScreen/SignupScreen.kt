@@ -35,7 +35,7 @@ import com.sopt.now.compose.data.auth.SignUpData.RequestSignUpDto
 fun SignupScreen(
     modifier: Modifier = Modifier,
     navController: NavController,
-    signupViewModel: SignUpViewModel = viewModel()
+    signupViewModel: SignUpViewModel = viewModel(),
 ) {
     val context = LocalContext.current
 
@@ -64,7 +64,7 @@ fun SignupScreen(
 
         // id
         Text(
-            text =  stringResource(id = R.string.ID),
+            text = stringResource(id = R.string.ID),
             fontSize = 20.sp,
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Left
@@ -73,7 +73,8 @@ fun SignupScreen(
         TextField(
             value = userId,
             onValueChange = { newValue ->
-                userId = newValue }, // 이 부분 안쓰면 입력안됨
+                userId = newValue
+            }, // 이 부분 안쓰면 입력안됨
             modifier = Modifier
                 .fillMaxWidth(),
             label = { Text(stringResource(id = R.string.input_ID)) },
@@ -93,7 +94,8 @@ fun SignupScreen(
         TextField(
             value = userPw,
             onValueChange = { newValue ->
-                userPw = newValue }, // 이 부분 안쓰면 입력안됨
+                userPw = newValue
+            }, // 이 부분 안쓰면 입력안됨
             modifier = modifier
                 .fillMaxWidth(),
             label = { Text(stringResource(id = R.string.input_PW)) },
@@ -113,7 +115,8 @@ fun SignupScreen(
         TextField(
             value = userName,
             onValueChange = { newValue ->
-                userName = newValue }, // 이 부분 안쓰면 입력안됨
+                userName = newValue
+            }, // 이 부분 안쓰면 입력안됨
             modifier = modifier
                 .fillMaxWidth(),
             label = { Text(stringResource(id = R.string.input_NICKNAME)) },
@@ -133,7 +136,8 @@ fun SignupScreen(
         TextField(
             value = userPhone,
             onValueChange = { newValue ->
-                userPhone = newValue }, // 이 부분 안쓰면 입력안됨
+                userPhone = newValue
+            }, // 이 부분 안쓰면 입력안됨
             modifier = modifier
                 .fillMaxWidth(),
             label = { Text(stringResource(id = R.string.INPUT_PHONE)) },
@@ -147,12 +151,12 @@ fun SignupScreen(
             text = stringResource(id = R.string.SIGNUP),
             onClick = {
                 signupViewModel.signUp(getSignUpRequestDto(userId, userPw, userName, userPhone))
-                Log.d("sign","$userId, $userPw, $userName, $userPhone")
+                Log.d("sign", "$userId, $userPw, $userName, $userPhone")
                 if (signUpState.isSuccess) {
                     Toast.makeText(context, signUpState.message, Toast.LENGTH_SHORT).show()
                     // 회원가입 성공 후 로그인 페이지로 이동
                     moveToLogin(signUpState.memberId!!, navController)
-                } else{
+                } else {
                     // 실패 메시지 출력
                     Toast.makeText(context, signUpState.message, Toast.LENGTH_SHORT).show()
                 }
@@ -162,7 +166,12 @@ fun SignupScreen(
     }
 }
 
-private fun getSignUpRequestDto(userId:String, userPw:String, userName:String, userPhone: String): RequestSignUpDto {
+private fun getSignUpRequestDto(
+    userId: String,
+    userPw: String,
+    userName: String,
+    userPhone: String,
+): RequestSignUpDto {
     return RequestSignUpDto(
         authenticationId = userId,
         password = userPw,

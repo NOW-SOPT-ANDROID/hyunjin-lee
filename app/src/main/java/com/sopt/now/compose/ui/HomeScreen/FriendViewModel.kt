@@ -17,11 +17,12 @@ class FriendViewModel : ViewModel() {
     init {
         loadUsers()
     }
+
     private fun loadUsers() {
         friendService.getUsers(2).enqueue(object : Callback<ResponseFriendDto> {
             override fun onResponse(
                 call: Call<ResponseFriendDto>,
-                response: Response<ResponseFriendDto>
+                response: Response<ResponseFriendDto>,
             ) {
                 if (response.isSuccessful) {
                     // 성공적으로 데이터를 받아온 경우

@@ -22,7 +22,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     // 회원가입 정보 받아오기
     fun getUserInfo(memberIdString: String) {
-        val memberId = memberIdString.toIntOrNull()?:0
+        val memberId = memberIdString.toIntOrNull() ?: 0
         Log.d("mainvew", "$memberId")
         authService.getUserInfo(memberId).enqueue(object : Callback<ResponseUserDto> {
             override fun onResponse(

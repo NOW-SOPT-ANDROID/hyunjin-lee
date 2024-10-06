@@ -26,7 +26,7 @@ class MyPageViewModel(application: Application) : AndroidViewModel(application) 
 
     // user 정보 받아오기
     fun getUserInfo(memberIdString: String) {
-        val memberId = memberIdString.toIntOrNull()?:0
+        val memberId = memberIdString.toIntOrNull() ?: 0
         ServicePool.authService.getUserInfo(memberId).enqueue(object : Callback<ResponseUserDto> {
             override fun onResponse(
                 call: Call<ResponseUserDto>,
