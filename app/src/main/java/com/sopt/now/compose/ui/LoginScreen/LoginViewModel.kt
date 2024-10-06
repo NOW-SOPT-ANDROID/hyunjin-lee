@@ -1,44 +1,92 @@
 package com.sopt.now.compose.ui.LoginScreen
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.sopt.now.compose.MyApplication
-import com.sopt.now.compose.data.UserData
+import android.app.Application
+import android.content.Context
+import android.util.Log
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
+import com.google.gson.Gson
+import com.sopt.now.compose.data.auth.LoginData.LoginState
+import com.sopt.now.compose.data.auth.LoginData.RequestLoginDto
+import com.sopt.now.compose.data.auth.LoginData.ResponseLoginDto
+import com.sopt.now.compose.data.auth.ServicePool.authService
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class LoginViewModel () : ViewModel() {
-    // 로그인 정보를 담은 User를 LiveData로 관리
-    private val _userInfo: MutableLiveData<Boolean> = MutableLiveData(false)
-    val userInfo: LiveData<Boolean> = _userInfo
+class LoginViewModel(application: Application) : AndroidViewModel(application) {
+    // 로그인 상태를 담은 flow
+    private val _loginstate = MutableSharedFlow<LoginState>()
+    val loginstate = _loginstate.asSharedFlow()
 
-    init {
-        setUserInfo()
-    }
+    fun login(request: RequestLoginDto) {
+        authService.login(request).enqueue(object : Callback<ResponseLoginDto> {
+            override fun onResponse(
+                call: Call<ResponseLoginDto>,
+                response: Response<ResponseLoginDto>,
+            ) {
+                if (response.isSuccessful) {
+                    val data: ResponseLoginDto? = response.body()
+                    val memberId = response.headers()["location"]
+                    saveMemberIdToPreferences(memberId)
 
-    private fun setUserInfo() {
-        if (MyApplication.prefs.getBoolean(LOGIN_STATE_KEY))
-            _userInfo.value = true
-    }
-
-    fun getUserInfo(): UserData {
-        return MyApplication.prefs.getUserData(PREF_KEY)
-    }
-
-    fun loginValid(id: String, pw: String, userData: UserData): Boolean {
-        when {
-            id.isBlank() -> return false
-            pw.isBlank() -> return false
-            id == userData.id && pw == userData.pw -> {
-                MyApplication.prefs.setBoolean(LOGIN_STATE_KEY, true)
-                setUserInfo()
-                return true
+                    viewModelScope.launch {
+                        _loginstate.emit(
+                            LoginState(
+                                isSuccess = true,
+                                message = "로그인 성공! 유저 ID는 $memberId 입니다",
+                                memberId = memberId
+                            )
+                        )
+                    }
+                } else {
+                    // 오류 응답 처리
+                    val error = response.errorBody()?.string()
+                    val gson = Gson()
+                    try {
+                        val errorResponse = gson.fromJson(error, ResponseLoginDto::class.java)
+                        viewModelScope.launch {
+                            _loginstate.emit(
+                                LoginState(
+                                    isSuccess = false,
+                                    message = "로그인 실패: ${errorResponse.message}" // 에러 메시지 사용
+                                )
+                            )
+                        }
+                    } catch (e: Exception) {
+                        viewModelScope.launch {
+                            _loginstate.emit(
+                                LoginState(
+                                    isSuccess = false,
+                                    message = "로그인 실패: 에러 메시지 파싱 실패"
+                                )
+                            )
+                        }
+                    }
+                }
             }
-            else -> return false
-        }
+            override fun onFailure(call: Call<ResponseLoginDto>, t: Throwable) {
+                viewModelScope.launch {
+                    _loginstate.emit(
+                        LoginState(
+                            isSuccess = false,
+                            message = "서버에러: ${t.message}"
+                        )
+                    )
+                }
+            }
+        })
     }
 
-    companion object {
-        private const val PREF_KEY = "userData"
-        private const val LOGIN_STATE_KEY = "true"
+    // Shared Preferences에 memberId 저장하는 함수
+    private fun saveMemberIdToPreferences(memberId: String?) {
+        val sharedPref = getApplication<Application>().getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE) ?: return
+        with (sharedPref.edit()) {
+            putString("memberId", memberId)
+            apply()
+        }
     }
 }

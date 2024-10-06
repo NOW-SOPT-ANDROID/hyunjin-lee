@@ -1,5 +1,8 @@
 package com.sopt.now.compose.ui.MypageScreen
 
+import android.content.Context
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -11,9 +14,16 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -21,9 +31,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.sopt.now.compose.MyApplication
 import com.sopt.now.compose.R
 import com.sopt.now.compose.component.AppButton
+import com.sopt.now.compose.data.mypage.MyPageState
 
 @Composable
 fun MypageScreen(
@@ -31,7 +41,32 @@ fun MypageScreen(
     modifier: Modifier = Modifier,
     navController: NavController,
 ) {
-    val userData = myPageViewModel.getUserInfo()
+    val context = LocalContext.current
+
+    // 사용자 정보 상태 관찰
+    val myPageState by myPageViewModel.myInfo.collectAsState(initial = MyPageState(isSuccess = false, ""))
+
+    var userId by rememberSaveable { mutableStateOf("") }
+    var userName by rememberSaveable { mutableStateOf("") }
+    var userPhone by rememberSaveable { mutableStateOf("") }
+
+    // 회원 정보 조회
+    val memberId = getMemberIdFromPreferences(context).toString()
+    Log.d("loginscreen", memberId)
+    LaunchedEffect(memberId) {
+        myPageViewModel.getUserInfo(memberId)
+    }
+
+    LaunchedEffect(myPageState) {
+        if (myPageState.isSuccess) {
+            Toast.makeText(context, myPageState.message, Toast.LENGTH_SHORT).show()
+            userId = myPageState.userId ?: ""
+            userName = myPageState.userName ?: ""
+            userPhone = myPageState.userPhone ?: ""
+        } else if (myPageState.message.isNotEmpty()) {
+            Toast.makeText(context, myPageState.message, Toast.LENGTH_SHORT).show()
+        }
+    }
 
     Column(
         modifier = modifier
@@ -47,8 +82,6 @@ fun MypageScreen(
             modifier = modifier.fillMaxWidth(),
             textAlign = TextAlign.Center
         )
-
-        // 높이 30dp인 공간 추가
         Spacer(modifier = modifier.height(50.dp))
 
         val painter = painterResource(id = R.drawable.ic_profile_img)
@@ -68,33 +101,12 @@ fun MypageScreen(
             modifier = modifier.fillMaxWidth(),
             textAlign = TextAlign.Left
         )
-
         Text(
-            text = userData.id,
+            text = userId,
             fontSize = 20.sp,
             modifier = modifier.fillMaxWidth(),
             textAlign = TextAlign.Left
         )
-
-        // 높이 30dp인 공간 추가
-        Spacer(modifier = modifier.height(30.dp))
-
-        // pw
-        Text(
-            text = stringResource(id = R.string.PW),
-            fontSize = 20.sp,
-            modifier = modifier.fillMaxWidth(),
-            textAlign = TextAlign.Left
-        )
-
-        Text(
-            text = userData.pw,
-            fontSize = 20.sp,
-            modifier = modifier.fillMaxWidth(),
-            textAlign = TextAlign.Left
-        )
-
-        // 높이 30dp인 공간 추가
         Spacer(modifier = modifier.height(30.dp))
 
         // nickname
@@ -104,38 +116,33 @@ fun MypageScreen(
             modifier = modifier.fillMaxWidth(),
             textAlign = TextAlign.Left
         )
-
         Text(
-            text = userData.name,
+            text = userName,
             fontSize = 20.sp,
             modifier = modifier.fillMaxWidth(),
             textAlign = TextAlign.Left
         )
-
-        // 높이 30dp인 공간 추가
         Spacer(modifier = modifier.height(30.dp))
 
-        // mbti
+        // phone
         Text(
-            text = stringResource(id = R.string.MBTI),
+            text = stringResource(id = R.string.PHONE),
             fontSize = 20.sp,
             modifier = modifier.fillMaxWidth(),
             textAlign = TextAlign.Left
         )
-
         Text(
-            text = userData.mbti,
+            text = userPhone,
             fontSize = 20.sp,
             modifier = modifier.fillMaxWidth(),
             textAlign = TextAlign.Left
         )
-        Spacer(modifier = Modifier.height(15.dp))
+        Spacer(modifier = modifier.height(30.dp))
 
         // 로그아웃 버튼
         AppButton(
             text = stringResource(id = R.string.LOGOUT),
             onClick = {
-                MyApplication.prefs.clearUserData()
                 navController.navigate("login") {
                     popUpTo("mypage") { inclusive = true }
                 }
@@ -143,4 +150,9 @@ fun MypageScreen(
             padding = PaddingValues(vertical = 10.dp)
         )
     }
+}
+
+fun getMemberIdFromPreferences(context: Context): String? {
+    val sharedPref = context.getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE)
+    return sharedPref.getString("memberId", null)
 }

@@ -26,14 +26,14 @@
     <string name="NICKNAME_TEXT">Hyunjin Lee</string>
 
 
-    <string name="MBTI">MBTI</string>
-    <string name="MBTI_TEXT">entj</string>
-    <string name="input_MBTI">MBTI를 입력해주세요</string>
+    <string name="PHONE">PHONE</string>
+    <string name="PHONE_TEXT">010-0000-0000</string>
+    <string name="INPUT_PHONE">전화번호를 입력해주세요</string>
 
     <string name="BACK_PRESSED">뒤로가기를 한번 더 누르면 종료됩니다.</string>
 
     <string name="isvalid_id">아이디는 6~10 글자여야 합니다.</string>
     <string name="isvalid_pw">비밀번호는 8~12 글자여야 합니다.</string>
     <string name="isvalid_name">닉네임은 한 글자 이상이어야 하며, 공백으로만 이루어질 수 없습니다.</string>
-    <string name="isvalid_mbti">MBTI를 올바르게 입력해주세요.</string>
+    <string name="isvalid_phone">전화번호를 올바르게 입력해주세요.</string>
 </resources>

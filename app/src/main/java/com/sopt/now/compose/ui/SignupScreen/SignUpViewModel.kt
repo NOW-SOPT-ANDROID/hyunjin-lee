@@ -1,38 +1,79 @@
 package com.sopt.now.compose.ui.SignupScreen
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
-import com.sopt.now.compose.MyApplication
-import com.sopt.now.compose.R
-import com.sopt.now.compose.data.UserData
+import com.sopt.now.compose.data.auth.ServicePool
+import com.sopt.now.compose.data.auth.SignUpData.RequestSignUpDto
+import com.sopt.now.compose.data.auth.SignUpData.ResponseSignUpDto
+import com.sopt.now.compose.data.auth.SignUpData.SignUpState
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class SignUpViewModel() : ViewModel() {
-    fun signUp(user: UserData) {
-        val json = Gson().toJson(user)
-        MyApplication.prefs.setString(PREF_KEY, json)
-    }
+    private val authService by lazy { ServicePool.authService }
+    private val _signUpState = MutableStateFlow(SignUpState(isSuccess = false, ""))
+    val signUpState: StateFlow<SignUpState> = _signUpState
 
-    // 회원가입 유효성 검사
-    fun validateSignUp(user: UserData): Int? {
-        return when {
-            !isValidId(user.id) -> R.string.isvalid_id
-            !isValidPassword(user.pw) -> R.string.isvalid_pw
-            !isValidNickname(user.name) -> R.string.isvalid_name
-            !isValidMbti(user.mbti.uppercase()) -> R.string.isvalid_mbti
-            else -> null // 통과
-        }
-    }
+    fun signUp(request: RequestSignUpDto) {
+        authService.signUp(request).enqueue(object : Callback<ResponseSignUpDto> {
+            override fun onResponse(
+                call: Call<ResponseSignUpDto>,
+                response: Response<ResponseSignUpDto>,
+            ) {
+                if (response.isSuccessful) {
+                    val data: ResponseSignUpDto? = response.body()
+                    val memberId = response.headers()["location"]
 
-    fun isValidId(id: String): Boolean = id.length in 6..10
-    fun isValidPassword(pwd: String): Boolean = pwd.length in 8..12
-    fun isValidNickname(nickname: String): Boolean = nickname.isNotBlank() && nickname.matches(nicknameRegex)
-    fun isValidMbti(mbti: String): Boolean = mbti.isNotBlank() && mbti.matches(mbtiRegex)
-
-    companion object {
-        private const val NICKNAME_PATTERN = "^[a-zA-Z0-9]*$"
-        private const val MBTI_PATTERN = "^(E|I)(S|N)(T|F)(J|P)$"
-        private val nicknameRegex = Regex(NICKNAME_PATTERN)
-        private val mbtiRegex = Regex(MBTI_PATTERN)
-        private const val PREF_KEY = "userData"
+                    viewModelScope.launch {
+                        _signUpState.emit(
+                            SignUpState(
+                                isSuccess = true,
+                                message = "회원가입 성공 유저의 ID는 $memberId 입니둥",
+                                memberId = memberId
+                            )
+                        )
+                    }
+                } else {
+                    // 오류 응답 처리
+                    val error = response.errorBody()?.string()
+                    val gson = Gson()
+                    try {
+                        val errorResponse = gson.fromJson(error, ResponseSignUpDto::class.java)
+                        viewModelScope.launch {
+                            _signUpState.emit(
+                                SignUpState(
+                                    isSuccess = false,
+                                    message = "회원가입 실패: ${errorResponse.message}" // 에러 메시지 사용
+                                )
+                            )
+                        }
+                    } catch (e: Exception) {
+                        viewModelScope.launch {
+                            _signUpState.emit(
+                                SignUpState(
+                                    isSuccess = false,
+                                    message = "회원가입 실패: 에러 메시지 파싱 실패"
+                                )
+                            )
+                        }
+                    }
+                }
+            }
+            override fun onFailure(call: Call<ResponseSignUpDto>, t: Throwable) {
+                viewModelScope.launch {
+                    _signUpState.emit(
+                        SignUpState(
+                            isSuccess = false,
+                            message = "서버에러"
+                        )
+                    )
+                }
+            }
+        })
     }
 }
